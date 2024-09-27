@@ -29,7 +29,7 @@ export default function Home() {
     <View className="flex-1 bg-[#11100f]">
       <Stack.Screen options={{ title: 'Racing' }} />
       <FlatList
-        contentContainerClassName="gap-3 p-5"
+        contentContainerClassName="gap-3 p-5 rounded"
         data={races}
         renderItem={({ item }) => <RaceListItem item={item} />}
       />

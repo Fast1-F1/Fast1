@@ -22,7 +22,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Standings',
+          title: 'Driver Standings',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="three"
+        options={{
+          title: 'Constructor Standings',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
           ),
