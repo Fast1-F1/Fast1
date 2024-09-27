@@ -1,9 +1,11 @@
 import { Stack } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { View } from 'react-native';
 
 export default function Home() {
   return (
-    <View className="flex-1 bg-[#212121]">
+    <View className="flex-1 bg-[#11100f]">
+      <StatusBar style="light" />
       <Stack.Screen options={{ title: 'Standings' }} />
       <View />
     </View>

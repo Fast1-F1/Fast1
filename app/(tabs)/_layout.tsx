@@ -9,6 +9,7 @@ export default function TabLayout() {
         tabBarActiveBackgroundColor: '#420d0c',
         tabBarStyle: { backgroundColor: '#2a2a2a' },
         headerStyle: { backgroundColor: '#2a2a2a' },
+        tabBarShowLabel: false,
         headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
       }}>
       <Tabs.Screen
@@ -22,7 +23,9 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Standings',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="flag-checkered" size={30} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
+          ),
         }}
       />
     </Tabs>

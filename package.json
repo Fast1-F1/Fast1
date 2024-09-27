@@ -2,6 +2,7 @@
   "name": "fast-1",
   "version": "1.0.0",
   "main": "expo-router/entry",
+  "type": "module",
   "scripts": {
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -14,6 +15,7 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/native": "^6.1.7",
+    "dayjs": "^1.11.13",
     "expo": "^51.0.34",
     "expo-constants": "~16.0.1",
     "expo-linking": "~6.3.1",
