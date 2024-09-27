@@ -1,4 +1,4 @@
-import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
@@ -8,7 +8,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: 'white',
         tabBarActiveBackgroundColor: '#420d0c',
         tabBarStyle: { backgroundColor: '#2a2a2a' },
-        headerStyle: { backgroundColor: '#2a2a2a' },
+        headerStyle: { backgroundColor: '#420d0c' },
         tabBarShowLabel: false,
         headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
       }}>
@@ -32,9 +32,7 @@ export default function TabLayout() {
         name="three"
         options={{
           title: 'Constructor Standings',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Feather name="bar-chart-2" size={30} color={color} />,
         }}
       />
     </Tabs>

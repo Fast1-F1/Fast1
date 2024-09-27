@@ -20,7 +20,7 @@ export default function DriverStandings() {
   return (
     <View className="flex-1 bg-[#11100f]">
       <StatusBar style="light" />
-      <Stack.Screen options={{ title: 'Driver Standings' }} />
+      <Stack.Screen options={{ title: 'Drivers Standings' }} />
       <FlatList data={drivers} renderItem={({ item }) => <DriverListItem item={item} />} />
       <View />
     </View>
