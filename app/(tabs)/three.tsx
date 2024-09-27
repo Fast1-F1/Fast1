@@ -3,8 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
-import ConstrutorListItem from '~/components/ConstructorListItem';
-import DriverListItem from '~/components/DriverListItem';
+import ConstructorListItem from '~/components/ConstructorListItem';
 
 export default function ConstructorStandings() {
   const [constructors, setConstructors] = useState([]);
@@ -21,7 +20,10 @@ export default function ConstructorStandings() {
     <View className="flex-1 bg-[#11100f]">
       <StatusBar style="light" />
       <Stack.Screen options={{ title: 'Constructors Standings' }} />
-      <FlatList data={constructors} renderItem={({ item }) => <ConstrutorListItem item={item} />} />
+      <FlatList
+        data={constructors}
+        renderItem={({ item }) => <ConstructorListItem item={item} />}
+      />
       <View />
     </View>
   );

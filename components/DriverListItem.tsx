@@ -1,6 +1,15 @@
 import { View, Text } from 'react-native';
 
-export default function DriverListItem({ item }) {
+type Driver = {
+  position: string;
+  points: string;
+  Driver: {
+    givenName: string;
+    familyName: string;
+  };
+};
+
+export default function DriverListItem({ item }: { item: Driver }) {
   return (
     <View className="m-2 flex-row items-center  gap-3 bg-[#2a2a2a] p-3">
       <Text className="mr-8 w-10 text-lg text-white">{item.position}</Text>
