@@ -1,29 +1,26 @@
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, Pressable, View } from 'react-native';
 
 import RaceListItem from '~/components/RaceListItem';
 
 export default function Home() {
   const [races, setRaces] = useState([]);
 
-  const fetchRaces = async () => {
-    try {
+  useEffect(() => {
+    const fetchRaces = async () => {
       const response = await fetch('https://ergast.com/api/f1/current.json');
       const data = await response.json();
-      return data.MRData.RaceTable.Races; // List of races in current season
-    } catch (error) {
-      console.error('Error fetching races:', error);
-    }
-  };
-
-  useEffect(() => {
-    const loadRaces = async () => {
-      const seasonRaces = await fetchRaces();
-      setRaces(seasonRaces);
+      setRaces(data.MRData.RaceTable.Races);
     };
-    loadRaces();
+
+    fetchRaces();
   }, []);
+
+  const handlePress = (race) => {
+    router.push(`/${race.round}`);
+  };
 
   return (
     <View className="flex-1 bg-[#11100f]">
@@ -31,8 +28,13 @@ export default function Home() {
       <FlatList
         contentContainerClassName="gap-3 p-5 rounded"
         data={races}
-        renderItem={({ item }) => <RaceListItem item={item} />}
+        renderItem={({ item }) => (
+          <Pressable onPress={() => handlePress(item)}>
+            <RaceListItem item={item} />
+          </Pressable>
+        )}
       />
+      <StatusBar style="light" />
       <View />
     </View>
   );
