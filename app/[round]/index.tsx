@@ -36,7 +36,7 @@ export default function RaceResultPage() {
       <Stack.Screen
         options={{
           title: 'Race Result',
-          headerStyle: { backgroundColor: '#420d0c' },
+          headerStyle: { backgroundColor: '#FF1E00' },
           headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
           headerBackTitleVisible: false,
           headerTintColor: 'white',
