@@ -1,7 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, ActivityIndicator } from 'react-native';
 
 import RaceResultsItem from '~/components/RaceResultsItem';
 import { RaceResults } from '~/types/types';
@@ -28,12 +28,17 @@ export default function RaceResultPage() {
         }
       } catch (error) {
         setErrorMessage('An error occurred while fetching the race results.');
+        console.log(error);
       }
       setLoading(false);
     };
 
     fetchRaceResults();
   }, [round]);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <View className="flex-1 bg-[#11100f]">
