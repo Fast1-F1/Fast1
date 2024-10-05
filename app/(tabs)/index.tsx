@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, View } from 'react-native';
 
 import RaceListItem from '~/components/RaceListItem';
+import { Race } from '~/types/types';
 
 export default function Home() {
   const [races, setRaces] = useState([]);
@@ -24,7 +25,7 @@ export default function Home() {
   if (loading) {
     return <ActivityIndicator />;
   }
-  const handlePress = (race) => {
+  const handlePress = (race: Race) => {
     router.push(`/${race.round}`);
   };
 
@@ -33,6 +34,7 @@ export default function Home() {
       <Stack.Screen options={{ title: 'Racing' }} />
       <FlatList
         contentContainerClassName="gap-3 p-5 rounded"
+        keyExtractor={(item: Race) => item.round}
         data={races}
         renderItem={({ item }) => (
           <Pressable onPress={() => handlePress(item)}>

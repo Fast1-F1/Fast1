@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
 import RaceResultsItem from '~/components/RaceResultsItem';
+import { RaceResults } from '~/types/types';
 
 export default function RaceResultPage() {
   const [results, setResults] = useState([]);
@@ -50,7 +51,11 @@ export default function RaceResultPage() {
           <Text style={{ color: 'white', textAlign: 'center' }}>{errorMessage}</Text>
         </View>
       ) : (
-        <FlatList data={results} renderItem={({ item }) => <RaceResultsItem item={item} />} />
+        <FlatList
+          data={results}
+          keyExtractor={(item: RaceResults) => item.Driver.familyName}
+          renderItem={({ item }) => <RaceResultsItem item={item} />}
+        />
       )}
 
       <StatusBar style="light" />

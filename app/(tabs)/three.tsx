@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import ConstructorListItem from '~/components/ConstructorListItem';
+import { Constructor } from '~/types/types';
 
 export default function ConstructorStandings() {
   const [constructors, setConstructors] = useState([]);
@@ -30,6 +31,7 @@ export default function ConstructorStandings() {
       <Stack.Screen options={{ title: 'Constructors Standings' }} />
       <FlatList
         data={constructors}
+        keyExtractor={(item: Constructor) => item.Constructor.name}
         renderItem={({ item }) => <ConstructorListItem item={item} />}
       />
       <View />

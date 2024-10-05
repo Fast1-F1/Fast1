@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import DriverListItem from '~/components/DriverListItem';
+import { Driver } from '~/types/types';
 
 export default function DriverStandings() {
   const [drivers, setDrivers] = useState([]);
@@ -28,7 +29,11 @@ export default function DriverStandings() {
     <View className="flex-1 bg-[#11100f]">
       <StatusBar style="light" />
       <Stack.Screen options={{ title: 'Drivers Standings' }} />
-      <FlatList data={drivers} renderItem={({ item }) => <DriverListItem item={item} />} />
+      <FlatList
+        data={drivers}
+        keyExtractor={(item: Driver) => item.Driver.familyName}
+        renderItem={({ item }) => <DriverListItem item={item} />}
+      />
       <View />
     </View>
   );

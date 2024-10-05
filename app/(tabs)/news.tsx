@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, ActivityIndicator, FlatList } from 'react-native';
 
 import NewsListItem from '~/components/NewsListItem';
+import { News } from '~/types/types';
 
 const apiKey = process.env.EXPO_PUBLIC_RAPID_API_KEY;
 
@@ -39,7 +40,7 @@ export default function NewsScreen() {
     <View>
       <FlatList
         contentContainerClassName="gap-3"
-        keyExtractor={(item) => item.dataSourceIdentifier}
+        keyExtractor={(item: News) => item.dataSourceIdentifier}
         data={news}
         renderItem={({ item }) => <NewsListItem item={item} />}
       />
