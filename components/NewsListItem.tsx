@@ -1,15 +1,6 @@
 import { Text, Image, View } from 'react-native';
 
-type News = {
-  dataSourceIdentifier: string;
-  description: string;
-  headline: string;
-  images: {
-    url: string;
-    caption?: string;
-  }[];
-  link: string;
-};
+import { News } from '~/types/types';
 
 export default function NewsListItem({ item }: { item: News }) {
   return (

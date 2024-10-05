@@ -1,13 +1,6 @@
 import { View, Text } from 'react-native';
 
-type Driver = {
-  position: string;
-  points: string;
-  Driver: {
-    givenName: string;
-    familyName: string;
-  };
-};
+import { Driver } from '~/types/types';
 
 export default function DriverListItem({ item }: { item: Driver }) {
   return (

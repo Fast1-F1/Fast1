@@ -2,16 +2,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import dayjs from 'dayjs';
 import { View, Text } from 'react-native';
 
-type Race = {
-  round: string;
-  raceName: string;
-  date: string;
-  Circuit: {
-    Location: {
-      country: string;
-    };
-  };
-};
+import { Race } from '~/types/types';
 
 export default function RaceListItem({ item }: { item: Race }) {
   const currentDay = new Date();

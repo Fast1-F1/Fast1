@@ -1,19 +1,6 @@
 import { View, Text } from 'react-native';
 
-type RaceResults = {
-  position: string;
-  status: string;
-  Driver: {
-    familyName: string;
-    givenName: string;
-  };
-  Constructor: {
-    name: string;
-  };
-  Time: {
-    time: string;
-  };
-};
+import { RaceResults } from '~/types/types';
 
 export default function RaceResultsItem({ item }: { item: RaceResults }) {
   return (
