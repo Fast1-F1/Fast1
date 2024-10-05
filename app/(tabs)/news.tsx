@@ -20,7 +20,7 @@ export default function NewsScreen() {
         },
       });
       const data = await response.json();
-      console.log(data);
+      console.log(JSON.stringify(data, null, 2));
       setNews(data);
     } catch (error) {
       console.log(error);

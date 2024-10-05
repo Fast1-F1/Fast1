@@ -14,13 +14,13 @@ export default function RaceResultsItem({ item }: { item: RaceResults }) {
           <Text className="text-md text-white">{item.Constructor.name}</Text>
         </View>
         {item.Time && (
-          <View className="pr-2">
-            <Text className="text-lg text-white">{item.Time.time}</Text>
+          <View className="p-1 pr-2">
+            <Text className="text-lg text-green-400">{item.Time.time}</Text>
           </View>
         )}
         {!item.Time && (
-          <View className="pr-2">
-            <Text className="text-lg text-white">{item.status}</Text>
+          <View className="p-1 pr-2">
+            <Text className="text-lg text-red-400">{item.status}</Text>
           </View>
         )}
       </View>

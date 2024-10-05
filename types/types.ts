@@ -42,6 +42,7 @@ export type RaceResults = {
 };
 
 export type News = {
+  id: string;
   dataSourceIdentifier: string;
   description: string;
   headline: string;
