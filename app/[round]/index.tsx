@@ -8,11 +8,13 @@ import RaceResultsItem from '~/components/RaceResultsItem';
 export default function RaceResultPage() {
   const [results, setResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { round } = useLocalSearchParams();
 
   useEffect(() => {
     const fetchRaceResults = async () => {
       try {
+        setLoading(true);
         const response = await fetch(`https://ergast.com/api/f1/current/${round}/results.json`);
         const data = await response.json();
         const race = data.MRData.RaceTable.Races[0];
@@ -26,6 +28,7 @@ export default function RaceResultPage() {
       } catch (error) {
         setErrorMessage('An error occurred while fetching the race results.');
       }
+      setLoading(false);
     };
 
     fetchRaceResults();

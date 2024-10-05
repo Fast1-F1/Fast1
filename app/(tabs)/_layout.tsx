@@ -1,4 +1,4 @@
-import { Feather, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, FontAwesome5, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
@@ -33,6 +33,13 @@ export default function TabLayout() {
         options={{
           title: 'Constructor Standings',
           tabBarIcon: ({ color }) => <Feather name="bar-chart-2" size={30} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="news"
+        options={{
+          title: 'News',
+          tabBarIcon: ({ color }) => <Entypo name="news" size={30} color={color} />,
         }}
       />
     </Tabs>
