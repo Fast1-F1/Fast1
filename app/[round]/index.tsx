@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { FlatList, View, Text, ActivityIndicator } from 'react-native';
@@ -42,6 +42,15 @@ export default function RaceResultPage() {
 
   return (
     <View className="flex-1 bg-[#11100f]">
+      <Stack.Screen
+        options={{
+          title: 'Race Result',
+          headerStyle: { backgroundColor: '#FF1E00' },
+          headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
+          headerTintColor: 'white',
+          headerBackTitle: 'Back',
+        }}
+      />
       {errorMessage ? (
         <View style={{ padding: 20 }}>
           <Text style={{ color: 'white', textAlign: 'center' }}>{errorMessage}</Text>
