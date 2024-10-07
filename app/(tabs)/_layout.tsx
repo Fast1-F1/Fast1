@@ -1,4 +1,4 @@
-import { Feather, FontAwesome5, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, FontAwesome5, MaterialCommunityIcons, FontAwesome6 } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
@@ -36,10 +36,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="news"
+        name="social"
         options={{
-          title: 'News',
-          tabBarIcon: ({ color }) => <Entypo name="news" size={30} color={color} />,
+          title: 'Social Media',
+          tabBarIcon: ({ color }) => <FontAwesome6 name="x-twitter" size={30} color={color} />,
         }}
       />
     </Tabs>
