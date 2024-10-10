@@ -1,5 +1,6 @@
+import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, Button, TextInput } from 'react-native';
+import { Alert, View, Button, TextInput } from 'react-native';
 
 import { supabase } from '~/utils/supabase';
 
@@ -35,8 +36,17 @@ export default function Login() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+    <View className="flex-1 items-center gap-2 bg-white p-3">
+      <Stack.Screen
+        options={{
+          title: 'Authentication',
+          headerStyle: { backgroundColor: '#FF1E00' },
+          headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
+          headerTintColor: 'white',
+          headerBackTitle: 'Back',
+        }}
+      />
+      <View className="rounded-lg border border-gray-300 p-2">
         <TextInput
           onChangeText={(text) => setEmail(text)}
           value={email}
@@ -44,7 +54,7 @@ export default function Login() {
           autoCapitalize="none"
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View>
         <TextInput
           onChangeText={(text) => setPassword(text)}
           value={password}
@@ -53,27 +63,12 @@ export default function Login() {
           autoCapitalize="none"
         />
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View>
         <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View>
         <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});
