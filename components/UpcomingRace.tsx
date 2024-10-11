@@ -23,6 +23,7 @@ export default function UpcomingRace() {
   const [races, setRaces] = useState<Race[]>([]);
   const [loading, setLoading] = useState(false);
   const [nextRace, setNextRace] = useState<NextRace | null>(null);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     setLoading(true);
@@ -48,24 +49,54 @@ export default function UpcomingRace() {
     fetchRaces();
   }, []);
 
+  useEffect(() => {
+    if (nextRace) {
+      const interval = setInterval(() => {
+        const raceDate = new Date(nextRace.date + 'T' + nextRace.time);
+        const currentTime = new Date();
+        const timeDifference = raceDate.getTime() - currentTime.getTime();
+
+        if (timeDifference > 0) {
+          const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+          const seconds = Math.floor((timeDifference / 1000) % 60);
+
+          setTimeLeft({ days, hours, minutes, seconds });
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [nextRace]);
+
   if (loading) {
     return <ActivityIndicator />;
   }
 
   return (
-    <View className="p-2">
-      <Text className="text-3xl font-bold text-yellow-300 ">Upcoming Race</Text>
-      {nextRace ? (
-        <View>
-          <Text className="text-lg font-semibold text-white">{nextRace.raceName}</Text>
-          <Text className="text-sm text-white">{nextRace.Circuit.circuitName}</Text>
-          <Text className="text-sm text-white">
-            {new Date(`${nextRace.date}T${nextRace.time}`).toLocaleString()}
-          </Text>
-        </View>
-      ) : (
-        <Text className="text-sm text-gray-500">No upcoming race available</Text>
-      )}
+    <View className="mt-5 p-2">
+      <View>
+        <Text className="text-4xl font-bold text-yellow-300 ">Upcoming Race</Text>
+        {nextRace ? (
+          <View className="m-1 gap-2 rounded-lg bg-gray-900 p-2">
+            <Text className="text-xl font-semibold text-white">{nextRace.raceName}</Text>
+            <Text className="text-md text-white">{nextRace.Circuit.circuitName}</Text>
+            <Text className="text-sm text-white">
+              {new Date(`${nextRace.date}T${nextRace.time}`).toLocaleString()}
+            </Text>
+          </View>
+        ) : (
+          <Text className="text-sm text-gray-500">No upcoming race available</Text>
+        )}
+      </View>
+      <View className="mt-2 items-center border border-red-600 p-2">
+        <Text className="mt-2 text-4xl text-red-500">
+          {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+        </Text>
+      </View>
     </View>
   );
 }
