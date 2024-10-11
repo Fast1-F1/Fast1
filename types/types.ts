@@ -9,9 +9,11 @@ export type Constructor = {
 export type Driver = {
   position: string;
   points: string;
+  wins: string;
   Driver: {
     givenName: string;
     familyName: string;
+    driverId: string;
   };
 };
 

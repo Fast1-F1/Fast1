@@ -36,7 +36,8 @@ export default function UpcomingRace() {
 
         // Find the next race after setting the state
         const upcomingRace = fetchedRaces.find(
-          (race) => new Date(`${race.date}T${race.time}`) > new Date()
+          (race: { date: string; time: string }) =>
+            new Date(`${race.date}T${race.time}`) > new Date()
         );
         setNextRace(upcomingRace);
       } catch (error) {
@@ -77,11 +78,11 @@ export default function UpcomingRace() {
   }
 
   return (
-    <View className="mt-5 p-2">
+    <View className="mt-3 p-2">
       <View>
-        <Text className="text-4xl font-bold text-yellow-300 ">Upcoming Race</Text>
+        <Text className="text-4xl font-bold text-white ">Upcoming Race</Text>
         {nextRace ? (
-          <View className="m-1 gap-2 rounded-lg bg-gray-900 p-2">
+          <View className="m-1 gap-2 rounded-lg bg-[#2a2a2a] p-2">
             <Text className="text-xl font-semibold text-white">{nextRace.raceName}</Text>
             <Text className="text-md text-white">{nextRace.Circuit.circuitName}</Text>
             <Text className="text-sm text-white">

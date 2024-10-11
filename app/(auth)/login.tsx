@@ -40,7 +40,7 @@ export default function Login() {
   return (
     <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
       <View className="mb-20 mt-3 items-center p-3">
-        <Text className="text-4xl font-bold text-yellow-400">Welcome to Fast1!</Text>
+        <Text className="text-4xl font-bold text-white">Welcome to Fast1!</Text>
       </View>
       <View className="flex-1 gap-2 p-3">
         <Stack.Screen
