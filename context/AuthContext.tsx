@@ -1,4 +1,4 @@
-import { Session } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/supabase-js';
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
@@ -15,10 +15,17 @@ export default function AuthContextProvider({ children }: PropsWithChildren) {
       setSession(session);
       setIsReady(true);
     });
-    supabase.auth.onAuthStateChange((_event, session) => {
+
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
+    // Cleanup subscription on unmount
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
+
   if (!isReady) {
     return <ActivityIndicator />;
   }
