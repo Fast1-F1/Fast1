@@ -94,7 +94,7 @@ export default function UpcomingRace() {
         )}
       </View>
       <View className="mt-2 items-center border border-red-600 p-2">
-        <Text className="mt-2 text-4xl text-red-500">
+        <Text className="mt-2 text-4xl font-bold text-red-600">
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
         </Text>
       </View>
