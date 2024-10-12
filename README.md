@@ -1,6 +1,6 @@
 # Fast1 Formula 1 App
 
-Seasonally updated Formula 1 races content with races, drivers, and information about races with race results. Current standings for drivers and constructors championship.
+Seasonally updated Formula 1 races content with races, drivers, and information about races with race results. Current standings for drivers and constructors championship. Social media posts from official F1 X account.
 
 ## API Reference
 
@@ -38,32 +38,23 @@ Here are some of the commonly used endpoints for accessing specific data:
 
 ---
 
-### F1 News API Reference
-
-#### Overview
-The F1 News API allows you to fetch the latest news articles related to Formula 1 racing. It provides headlines, descriptions, links to articles, and images associated with each news item.
-
-#### API Endpoint
-- **Base URL**: `https://f1-motorsport-data.p.rapidapi.com`
-- **News Endpoint**: `/news`
-
-#### Request Method
-- **GET**: This method is used to retrieve news articles.
-
-#### Request Headers
-You need to include the following headers in your request:
-- **`x-rapidapi-key`**: Your API key provided by RapidAPI.
-- **`x-rapidapi-host`**: `f1-motorsport-data.p.rapidapi.com`
-
----
-
 ## Features
 
 - Live race list of current season
 - Live race rankings and race results
 - Live drivers championship standings
 - Live constructors championship standings
+- Social media contents from F1 X account
 
 ## Screenshots
 
-*(Insert your screenshots here)*
+<img width="332" alt="Screenshot 2024-10-11 at 17 43 36" src="https://github.com/user-attachments/assets/ece353de-aac1-4d00-8aaf-cfb68e97c79d">
+
+<img width="332" alt="Screenshot 2024-10-11 at 17 40 18" src="https://github.com/user-attachments/assets/314b6241-1759-42c1-ab30-057f312ba272">
+
+<img width="332" alt="Screenshot 2024-10-11 at 17 40 29" src="https://github.com/user-attachments/assets/a5906d84-add3-4831-be49-ab8d0cc40b56">
+
+<img width="332" alt="Screenshot 2024-10-11 at 17 40 33" src="https://github.com/user-attachments/assets/7905adbc-7b88-4c67-9723-70693aaf0303">
+
+<img width="332" alt="Screenshot 2024-10-11 at 17 40 37" src="https://github.com/user-attachments/assets/ab20b1c1-d5ef-4206-8349-8b1d6ea27c0e">
+
