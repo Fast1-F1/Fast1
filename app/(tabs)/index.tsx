@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 
 import TopDrivers from '~/components/TopDrivers';
 import TopTeams from '~/components/TopTeams';
@@ -9,7 +9,10 @@ import { supabase } from '~/utils/supabase';
 
 export default function LandingPage() {
   return (
-    <ScrollView className="flex-1 bg-[#11100f]">
+    <View className="flex-1 bg-[#11100f]">
+      <Text className="mt-2 p-2 text-3xl font-extrabold text-red-600">
+        Welcome to <Text className="text-white">Fast 1</Text> !
+      </Text>
       <Tabs.Screen
         options={{
           headerRight: () => (
@@ -24,8 +27,11 @@ export default function LandingPage() {
         }}
       />
       <UpcomingRace />
-      <TopDrivers />
-      <TopTeams />
-    </ScrollView>
+      <Text className="p-2 text-3xl font-bold text-white">Championship</Text>
+      <View className="m-2 flex-row justify-between border border-gray-400 p-2">
+        <TopDrivers />
+        <TopTeams />
+      </View>
+    </View>
   );
 }

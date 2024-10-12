@@ -34,7 +34,7 @@ export default function TopDrivers() {
 
   return (
     <View className="p-4">
-      <Text className="mb-3 text-2xl font-bold text-white">Drivers Championship</Text>
+      <Text className="mb-3 text-2xl font-bold text-white">Drivers</Text>
       {topDrivers.map((driver, index) => (
         <View key={driver.Driver.driverId} className="mb-2">
           <Text className={`text-xl font-bold ${positionStyles[index]}`}>

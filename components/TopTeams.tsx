@@ -34,9 +34,9 @@ export default function TopConstructors() {
 
   return (
     <View className="p-4">
-      <Text className="mb-4 text-2xl font-bold text-white">Constructors Championship</Text>
+      <Text className="mb-3 text-2xl font-bold text-white">Constructors</Text>
       {topConstructors.map((constructor, index) => (
-        <View key={constructor.Constructor.constructorId} className="mb-3">
+        <View key={constructor.Constructor.constructorId} className="mb-2">
           <Text className={`text-xl font-bold ${positionStyles[index]}`}>
             {index + 1}. {constructor.Constructor.name}
           </Text>
