@@ -48,10 +48,7 @@ Here are some of the commonly used endpoints for accessing specific data:
 
 ## Screenshots
 
-<video width="640" height="480" controls>
-  <source src="https://github.com/user-attachments/assets/dac3d2e3-9405-4dbc-a97f-7f5c44eaaf0e" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Watch the video](https://github.com/user-attachments/assets/dac3d2e3-9405-4dbc-a97f-7f5c44eaaf0e)
 
 <img width="332" alt="Screenshot 2024-10-11 at 17 43 36" src="https://github.com/user-attachments/assets/ece353de-aac1-4d00-8aaf-cfb68e97c79d">
 
