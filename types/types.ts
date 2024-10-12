@@ -1,9 +1,11 @@
 export type Constructor = {
   Constructor: {
     name: string;
+    constructorId: string;
   };
   position: string;
   points: string;
+  wins: string;
 };
 
 export type Driver = {
@@ -24,6 +26,8 @@ export type Race = {
   Circuit: {
     Location: {
       country: string;
+      long: string;
+      lat: string;
     };
   };
 };
