@@ -1,9 +1,8 @@
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, View, Image, TextInput, Pressable, Text, ImageBackground } from 'react-native';
+import { Alert, View, TextInput, Pressable, Text, ImageBackground } from 'react-native';
 
-import bg from '../../assets/bg.jpg';
-
+import bg from '~/assets/bg.jpg';
 import { supabase } from '~/utils/supabase';
 
 export default function Login() {
@@ -40,7 +39,9 @@ export default function Login() {
   return (
     <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
       <View className="mb-20 mt-3 items-center p-3">
-        <Text className="text-4xl font-bold text-white">Welcome to Fast1!</Text>
+        <Text className="text-4xl font-bold text-white">
+          Welcome to <Text className="text-red-600">Fast1</Text> !
+        </Text>
       </View>
       <View className="flex-1 gap-2 p-3">
         <Stack.Screen
@@ -71,7 +72,8 @@ export default function Login() {
             autoCapitalize="none"
           />
         </View>
-        <View className="mb-auto mt-5 gap-3">
+        <View className="flex-1" />
+        <View className="mb-5 mt-5 gap-3">
           <Pressable
             className="items-center rounded-lg border border-gray-400 bg-white p-3"
             disabled={loading}
