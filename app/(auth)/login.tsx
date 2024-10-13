@@ -1,4 +1,4 @@
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, View, TextInput, Pressable, Text, ImageBackground } from 'react-native';
 
@@ -74,11 +74,6 @@ export default function Login() {
             autoCapitalize="none"
           />
         </View>
-        <Link asChild href="/(auth)/resetpassword">
-          <Pressable>
-            <Text className="pl-5 text-lg font-bold text-[#FFD700]">Forgot Password?</Text>
-          </Pressable>
-        </Link>
         <View className="flex-1" />
         <View className="mb-5 mt-5 gap-3 p-2">
           <Pressable
