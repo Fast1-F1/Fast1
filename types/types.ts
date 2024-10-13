@@ -47,6 +47,25 @@ export type RaceResults = {
   };
 };
 
+export type QualifyingResults = {
+  position: string;
+  Driver: {
+    driverId: string;
+    givenName: string;
+    familyName: string;
+    dateOfBirth: string;
+    nationality: string;
+  };
+  Constructor: {
+    constructorId: string;
+    name: string;
+    nationality: string;
+  };
+  Q1: string;
+  Q2?: string;
+  Q3?: string;
+};
+
 export type News = {
   id: string;
   dataSourceIdentifier: string;
