@@ -39,8 +39,8 @@ export default function Login() {
   return (
     <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
       <View className="mb-20 mt-3 items-center p-3">
-        <Text className="text-4xl font-bold text-white">
-          Welcome to <Text className="text-red-600">Fast1</Text> !
+        <Text className="text-4xl font-bold text-red-600">
+          Welcome to <Text className="text-white">Fast1</Text> !
         </Text>
       </View>
       <View className="flex-1 gap-2 p-3">
@@ -54,6 +54,7 @@ export default function Login() {
           }}
         />
         <View className="p-2">
+          <Text className="text-xl font-bold text-yellow-400">Email</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-5"
             onChangeText={(text) => setEmail(text)}
@@ -63,17 +64,19 @@ export default function Login() {
           />
         </View>
         <View className="p-2">
+          <Text className="text-xl font-bold text-yellow-400">Password</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-5"
             onChangeText={(text) => setPassword(text)}
             value={password}
             secureTextEntry
-            placeholder="Password"
+            placeholder="******"
             autoCapitalize="none"
           />
         </View>
+        <Text className="pl-5 text-lg font-bold text-red-600">Forgot Password?</Text>
         <View className="flex-1" />
-        <View className="mb-5 mt-5 gap-3">
+        <View className="mb-5 mt-5 gap-3 p-2">
           <Pressable
             className="items-center rounded-lg border border-gray-400 bg-white p-3"
             disabled={loading}
