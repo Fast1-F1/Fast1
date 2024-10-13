@@ -7,5 +7,14 @@ export default function AuthLayout() {
   if (user) {
     return <Redirect href="/" />;
   }
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: '#FF1E00' },
+        headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
+        headerTintColor: 'white',
+        headerBackTitle: 'Back',
+      }}
+    />
+  );
 }

@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, View, TextInput, Pressable, Text, ImageBackground } from 'react-native';
 
@@ -54,9 +54,9 @@ export default function Login() {
           }}
         />
         <View className="p-2">
-          <Text className="text-xl font-bold text-yellow-400">Email</Text>
+          <Text className="text-xl font-bold text-[#FFD700]">Email</Text>
           <TextInput
-            className="rounded border border-gray-600 bg-white p-5"
+            className="rounded border border-gray-600 bg-white p-4"
             onChangeText={(text) => setEmail(text)}
             value={email}
             placeholder="email@address.com"
@@ -64,9 +64,9 @@ export default function Login() {
           />
         </View>
         <View className="p-2">
-          <Text className="text-xl font-bold text-yellow-400">Password</Text>
+          <Text className="text-xl font-bold text-[#FFD700]">Password</Text>
           <TextInput
-            className="rounded border border-gray-600 bg-white p-5"
+            className="rounded border border-gray-600 bg-white p-4"
             onChangeText={(text) => setPassword(text)}
             value={password}
             secureTextEntry
@@ -74,7 +74,11 @@ export default function Login() {
             autoCapitalize="none"
           />
         </View>
-        <Text className="pl-5 text-lg font-bold text-red-600">Forgot Password?</Text>
+        <Link asChild href="/(auth)/resetpassword">
+          <Pressable>
+            <Text className="pl-5 text-lg font-bold text-[#FFD700]">Forgot Password?</Text>
+          </Pressable>
+        </Link>
         <View className="flex-1" />
         <View className="mb-5 mt-5 gap-3 p-2">
           <Pressable
