@@ -40,7 +40,7 @@ export default function RaceResultPage() {
         if (qualifying && qualifying.QualifyingResults && qualifying.QualifyingResults.length > 0) {
           setQualifyingResults(qualifying.QualifyingResults);
         } else {
-          setErrorMessage('No qualifying data available for this race.');
+          setErrorMessage('No data available for this race.');
         }
       } catch (error) {
         setErrorMessage('An error occurred while fetching the data.');
