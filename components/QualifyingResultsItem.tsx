@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import { View, Text } from 'react-native';
 
 import { QualifyingResults } from '~/types/types';
@@ -19,6 +20,7 @@ export default function QualifyingResultsItem({ item }: { item: QualifyingResult
           <Text className="text-md font-semibold text-yellow-500">Q1: {item.Q1}</Text>
         </View>
       </View>
+      <StatusBar style="light" />
     </View>
   );
 }

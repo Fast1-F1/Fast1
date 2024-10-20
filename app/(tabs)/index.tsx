@@ -1,5 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { View, Text, ScrollView } from 'react-native';
 
 import TopDrivers from '~/components/TopDrivers';
@@ -29,6 +30,7 @@ export default function LandingPage() {
         <TopDrivers />
         <TopTeams />
       </View>
+      <StatusBar style="light" />
     </ScrollView>
   );
 }

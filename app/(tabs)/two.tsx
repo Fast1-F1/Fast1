@@ -1,7 +1,8 @@
+import { FlashList } from '@shopify/flash-list';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
 import DriverListItem from '~/components/DriverListItem';
 import { Driver } from '~/types/types';
@@ -29,10 +30,11 @@ export default function DriverStandings() {
     <View className="flex-1 bg-[#11100f]">
       <StatusBar style="light" />
       <Stack.Screen options={{ title: 'Drivers Standings' }} />
-      <FlatList
+      <FlashList
         data={drivers}
         keyExtractor={(item: Driver) => item.Driver.familyName}
         renderItem={({ item }) => <DriverListItem item={item} />}
+        estimatedItemSize={200}
       />
       <View />
     </View>

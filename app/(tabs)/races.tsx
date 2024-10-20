@@ -1,7 +1,8 @@
+import { FlashList } from '@shopify/flash-list';
 import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 
 import RaceListItem from '~/components/RaceListItem';
 import { Race } from '~/types/types';
@@ -32,12 +33,13 @@ export default function Home() {
   return (
     <View className="flex-1 bg-[#11100f]">
       <Stack.Screen options={{ title: 'Racing' }} />
-      <FlatList
-        contentContainerClassName="gap-3 p-5 rounded"
+      <FlashList
+        contentContainerStyle={{ padding: 10 }}
         keyExtractor={(item: Race) => item.round}
         data={races}
+        estimatedItemSize={200}
         renderItem={({ item }) => (
-          <Pressable onPress={() => handlePress(item)}>
+          <Pressable className="p-1" onPress={() => handlePress(item)}>
             <RaceListItem item={item} />
           </Pressable>
         )}

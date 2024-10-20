@@ -1,3 +1,4 @@
+import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
@@ -84,11 +85,12 @@ export default function RaceResultPage() {
       ) : (
         <>
           <Text className="p-2 text-xl font-bold text-white">Race Results</Text>
-          <FlatList
+          <FlashList
             data={results}
             keyExtractor={(item: RaceResults) => item.Driver.familyName}
             renderItem={({ item }) => <RaceResultsItem item={item} />}
             scrollEnabled={false}
+            estimatedItemSize={200}
           />
         </>
       )}
@@ -100,11 +102,12 @@ export default function RaceResultPage() {
       ) : (
         <>
           <Text className="p-2 text-xl font-bold text-white">Qualifying Results</Text>
-          <FlatList
+          <FlashList
             data={qualifyingResults}
             keyExtractor={(item: QualifyingResults) => item.Driver.familyName}
             renderItem={({ item }) => <QualifyingResultsItem item={item} />}
             scrollEnabled={false}
+            estimatedItemSize={200}
           />
         </>
       )}

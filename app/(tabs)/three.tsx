@@ -1,7 +1,8 @@
+import { FlashList } from '@shopify/flash-list';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
 import ConstructorListItem from '~/components/ConstructorListItem';
 import { Constructor } from '~/types/types';
@@ -29,10 +30,11 @@ export default function ConstructorStandings() {
     <View className="flex-1 bg-[#11100f]">
       <StatusBar style="light" />
       <Stack.Screen options={{ title: 'Constructors Standings' }} />
-      <FlatList
+      <FlashList
         data={constructors}
         keyExtractor={(item: Constructor) => item.Constructor.name}
         renderItem={({ item }) => <ConstructorListItem item={item} />}
+        estimatedItemSize={200}
       />
       <View />
     </View>
