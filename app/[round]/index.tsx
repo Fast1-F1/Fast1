@@ -10,46 +10,56 @@ import { RaceResults, QualifyingResults } from '~/types/types';
 export default function RaceResultPage() {
   const [results, setResults] = useState([]);
   const [qualifyingResults, setQualifyingResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [raceErrorMessage, setRaceErrorMessage] = useState<string | null>(null);
+  const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const { round } = useLocalSearchParams();
 
   useEffect(() => {
-    const fetchRaceData = async () => {
+    const fetchRaceResults = async () => {
       try {
-        setLoading(true);
-
-        // Fetch race results
-        const raceResponse = await fetch(`https://ergast.com/api/f1/current/${round}/results.json`);
-        const raceData = await raceResponse.json();
-        const race = raceData.MRData.RaceTable.Races[0];
+        const response = await fetch(`https://ergast.com/api/f1/current/${round}/results.json`);
+        const data = await response.json();
+        const race = data.MRData.RaceTable.Races[0];
 
         if (race && race.Results && race.Results.length > 0) {
           setResults(race.Results);
+          setRaceErrorMessage(null);
         } else {
-          setErrorMessage('This race has not occurred yet. Please check back later.');
+          setRaceErrorMessage('This race has not occurred yet. Please check back later.');
         }
+      } catch (error) {
+        setRaceErrorMessage('An error occurred while fetching the race results.');
+        console.error(error);
+      }
+    };
 
-        // Fetch qualifying results
-        const qualifyingResponse = await fetch(
-          `https://ergast.com/api/f1/current/${round}/qualifying.json`
-        );
-        const qualifyingData = await qualifyingResponse.json();
-        const qualifying = qualifyingData.MRData.RaceTable.Races[0];
+    const fetchQualifyingResults = async () => {
+      try {
+        const response = await fetch(`https://ergast.com/api/f1/current/${round}/qualifying.json`);
+        const data = await response.json();
+        const qualifying = data.MRData.RaceTable.Races[0];
 
         if (qualifying && qualifying.QualifyingResults && qualifying.QualifyingResults.length > 0) {
           setQualifyingResults(qualifying.QualifyingResults);
+          setQualifyingErrorMessage(null);
         } else {
-          setErrorMessage('No data available for this race.');
+          setQualifyingErrorMessage('No qualifying data available for this race.');
         }
       } catch (error) {
-        setErrorMessage('An error occurred while fetching the data.');
-        console.log(error);
+        setQualifyingErrorMessage('An error occurred while fetching the qualifying results.');
+        console.error(error);
       }
+    };
+
+    // Fetch both race results and qualifying results
+    const fetchData = async () => {
+      setLoading(true);
+      await Promise.all([fetchRaceResults(), fetchQualifyingResults()]);
       setLoading(false);
     };
 
-    fetchRaceData();
+    fetchData();
   }, [round]);
 
   if (loading) {
@@ -67,9 +77,9 @@ export default function RaceResultPage() {
           headerBackTitle: 'Back',
         }}
       />
-      {errorMessage ? (
+      {raceErrorMessage ? (
         <View style={{ padding: 20 }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>{errorMessage}</Text>
+          <Text style={{ color: 'white', textAlign: 'center' }}>{raceErrorMessage}</Text>
         </View>
       ) : (
         <>
@@ -80,7 +90,15 @@ export default function RaceResultPage() {
             renderItem={({ item }) => <RaceResultsItem item={item} />}
             scrollEnabled={false}
           />
+        </>
+      )}
 
+      {qualifyingErrorMessage ? (
+        <View style={{ padding: 20 }}>
+          <Text style={{ color: 'white', textAlign: 'center' }}>{qualifyingErrorMessage}</Text>
+        </View>
+      ) : (
+        <>
           <Text className="p-2 text-xl font-bold text-white">Qualifying Results</Text>
           <FlatList
             data={qualifyingResults}
