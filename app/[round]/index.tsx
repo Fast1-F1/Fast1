@@ -12,14 +12,10 @@ import { RaceResults, QualifyingResults, SprintResult } from '~/types/types';
 export default function RaceResultPage() {
   const [results, setResults] = useState<RaceResults[]>([]);
   const [qualifyingResults, setQualifyingResults] = useState<QualifyingResults[]>([]);
-  const [sprintQualifyingResults, setSprintQualifyingResults] = useState([]);
   const [sprintResults, setSprintResults] = useState<SprintResult[]>([]);
   const [raceErrorMessage, setRaceErrorMessage] = useState<string | null>(null);
   const [sprintErrorMessage, setSprintErrorMessage] = useState<string | null>(null);
   const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | null>(null);
-  const [sprintQualifyingErrorMessage, setSprintQualifyingErrorMessage] = useState<string | null>(
-    null
-  );
 
   const [loading, setLoading] = useState(true);
   const { round } = useLocalSearchParams();
@@ -78,38 +74,10 @@ export default function RaceResultPage() {
         console.error(error);
       }
     };
-    const fetchSprintQualifyingResults = async () => {
-      try {
-        const response = await fetch(
-          `https://ergast.com/api/f1/current/${round}/sprintqualifying.json`
-        );
-        const data = await response.json();
-        const race = data.MRData.RaceTable.Races[0];
-
-        if (race && race.QualifyingResults && race.QualifyingResults.length > 0) {
-          setSprintQualifyingResults(race.QualifyingResults);
-          setSprintQualifyingErrorMessage(null);
-        } else {
-          setSprintQualifyingErrorMessage(
-            'Sprint qualifying results are not available for this round.'
-          );
-        }
-      } catch (error) {
-        setSprintQualifyingErrorMessage(
-          'An error occurred while fetching the sprint qualifying results.'
-        );
-        console.error(error);
-      }
-    };
 
     const fetchData = async () => {
       setLoading(true);
-      await Promise.all([
-        fetchRaceResults(),
-        fetchQualifyingResults(),
-        fetchSprintResults(),
-        fetchSprintQualifyingResults(),
-      ]);
+      await Promise.all([fetchRaceResults(), fetchQualifyingResults(), fetchSprintResults()]);
       setLoading(false);
     };
 
