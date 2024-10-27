@@ -2,17 +2,25 @@ import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { FlatList, View, Text, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 
 import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
-import { RaceResults, QualifyingResults } from '~/types/types';
+import SprintResultsItem from '~/components/SprintResultsItem';
+import { RaceResults, QualifyingResults, SprintResult } from '~/types/types';
 
 export default function RaceResultPage() {
-  const [results, setResults] = useState([]);
-  const [qualifyingResults, setQualifyingResults] = useState([]);
+  const [results, setResults] = useState<RaceResults[]>([]);
+  const [qualifyingResults, setQualifyingResults] = useState<QualifyingResults[]>([]);
+  const [sprintQualifyingResults, setSprintQualifyingResults] = useState([]);
+  const [sprintResults, setSprintResults] = useState<SprintResult[]>([]);
   const [raceErrorMessage, setRaceErrorMessage] = useState<string | null>(null);
+  const [sprintErrorMessage, setSprintErrorMessage] = useState<string | null>(null);
   const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | null>(null);
+  const [sprintQualifyingErrorMessage, setSprintQualifyingErrorMessage] = useState<string | null>(
+    null
+  );
+
   const [loading, setLoading] = useState(true);
   const { round } = useLocalSearchParams();
 
@@ -35,6 +43,24 @@ export default function RaceResultPage() {
       }
     };
 
+    const fetchSprintResults = async () => {
+      try {
+        const response = await fetch(`https://ergast.com/api/f1/current/${round}/sprint.json`);
+        const data = await response.json();
+        const race = data.MRData.RaceTable.Races[0];
+
+        if (race && race.SprintResults && race.SprintResults.length > 0) {
+          setSprintResults(race.SprintResults);
+          setSprintErrorMessage(null);
+        } else {
+          setSprintErrorMessage('Sprint race results are not available for this round.');
+        }
+      } catch (error) {
+        setSprintErrorMessage('An error occurred while fetching the sprint race results.');
+        console.error(error);
+      }
+    };
+
     const fetchQualifyingResults = async () => {
       try {
         const response = await fetch(`https://ergast.com/api/f1/current/${round}/qualifying.json`);
@@ -52,11 +78,38 @@ export default function RaceResultPage() {
         console.error(error);
       }
     };
+    const fetchSprintQualifyingResults = async () => {
+      try {
+        const response = await fetch(
+          `https://ergast.com/api/f1/current/${round}/sprintqualifying.json`
+        );
+        const data = await response.json();
+        const race = data.MRData.RaceTable.Races[0];
 
-    // Fetch both race results and qualifying results
+        if (race && race.QualifyingResults && race.QualifyingResults.length > 0) {
+          setSprintQualifyingResults(race.QualifyingResults);
+          setSprintQualifyingErrorMessage(null);
+        } else {
+          setSprintQualifyingErrorMessage(
+            'Sprint qualifying results are not available for this round.'
+          );
+        }
+      } catch (error) {
+        setSprintQualifyingErrorMessage(
+          'An error occurred while fetching the sprint qualifying results.'
+        );
+        console.error(error);
+      }
+    };
+
     const fetchData = async () => {
       setLoading(true);
-      await Promise.all([fetchRaceResults(), fetchQualifyingResults()]);
+      await Promise.all([
+        fetchRaceResults(),
+        fetchQualifyingResults(),
+        fetchSprintResults(),
+        fetchSprintQualifyingResults(),
+      ]);
       setLoading(false);
     };
 
@@ -91,6 +144,22 @@ export default function RaceResultPage() {
             renderItem={({ item }) => <RaceResultsItem item={item} />}
             scrollEnabled={false}
             estimatedItemSize={200}
+          />
+        </>
+      )}
+
+      {sprintErrorMessage ? (
+        <View style={{ padding: 20 }}>
+          <Text style={{ color: 'white', textAlign: 'center' }}>{sprintErrorMessage}</Text>
+        </View>
+      ) : (
+        <>
+          <Text className="p-2 text-xl font-bold text-white">Sprint Race Results</Text>
+          <FlashList
+            data={sprintResults}
+            keyExtractor={(item) => `${round}-${item.Driver.driverId}-${item.position}`}
+            renderItem={({ item }) => <SprintResultsItem item={item} />}
+            estimatedItemSize={30}
           />
         </>
       )}
