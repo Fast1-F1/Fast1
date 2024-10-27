@@ -15,9 +15,9 @@ export default function QualifyingResultsItem({ item }: { item: QualifyingResult
           <Text className="text-md text-white">{item.Constructor.name}</Text>
         </View>
         <View>
-          <Text className="text-md font-semibold text-red-500">Q3: {item.Q3}</Text>
-          <Text className="text-md font-semibold text-blue-500">Q2: {item.Q2}</Text>
-          <Text className="text-md font-semibold text-yellow-500">Q1: {item.Q1}</Text>
+          {item.Q3 && <Text className="text-md font-semibold text-red-500">Q3: {item.Q3}</Text>}
+          {item.Q2 && <Text className="text-md font-semibold text-blue-500">Q2: {item.Q2}</Text>}
+          {item.Q1 && <Text className="text-md font-semibold text-yellow-500">Q1: {item.Q1}</Text>}
         </View>
       </View>
       <StatusBar style="light" />
