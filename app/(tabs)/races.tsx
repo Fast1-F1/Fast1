@@ -1,8 +1,9 @@
 import { FlashList } from '@shopify/flash-list';
 import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import RaceListItem from '~/components/RaceListItem';
 import { Race } from '~/types/types';
@@ -24,7 +25,23 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <ActivityIndicator />;
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#11100f',
+        }}>
+        <Stack.Screen options={{ title: 'Racing' }} />
+        <LottieView
+          source={require('../../assets/animations/loading.json')}
+          autoPlay
+          loop
+          style={{ width: 150, height: 150 }}
+        />
+      </View>
+    );
   }
   const handlePress = (race: Race) => {
     router.push(`/${race.round}`);
