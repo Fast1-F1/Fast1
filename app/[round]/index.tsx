@@ -1,8 +1,9 @@
 import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
@@ -85,7 +86,31 @@ export default function RaceResultPage() {
   }, [round]);
 
   if (loading) {
-    return <ActivityIndicator />;
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#11100f',
+        }}>
+        <Stack.Screen
+          options={{
+            title: 'Race and Qualifying Result',
+            headerStyle: { backgroundColor: '#FF1E00' },
+            headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
+            headerTintColor: 'white',
+            headerBackTitle: 'Back',
+          }}
+        />
+        <LottieView
+          source={require('../../assets/animations/loading.json')}
+          autoPlay
+          loop
+          style={{ width: 150, height: 150 }}
+        />
+      </View>
+    );
   }
 
   return (
