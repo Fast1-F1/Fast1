@@ -1,6 +1,15 @@
 import { Redirect, router, Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, View, TextInput, Pressable, Text, ImageBackground } from 'react-native';
+import {
+  Alert,
+  View,
+  TextInput,
+  Pressable,
+  Text,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 
 import bg from '../../assets/bg.jpg';
 
@@ -29,60 +38,64 @@ export default function Login() {
   }
 
   return (
-    <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
-      <View className="mb-20 mt-3 items-center p-3">
-        <Text className="text-4xl font-bold text-red-600">
-          Welcome to <Text className="text-white">Fast1</Text>!
-        </Text>
-      </View>
-      <View className="flex-1 gap-2 p-3">
-        <Stack.Screen
-          options={{
-            title: 'Login',
-            headerStyle: { backgroundColor: '#FF1E00' },
-            headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
-            headerTintColor: 'white',
-            headerBackTitle: 'Back',
-          }}
-        />
-        <View className="p-2">
-          <Text className="text-xl font-bold text-yellow-300">Email</Text>
-          <TextInput
-            className="rounded border border-gray-600 bg-white p-4"
-            onChangeText={setEmail}
-            value={email}
-            placeholder="email@address.com"
-            autoCapitalize="none"
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={100}>
+      <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
+        <View className="mb-20 mt-3 items-center p-3">
+          <Text className="text-4xl font-bold text-red-600">
+            Welcome to <Text className="text-white">Fast1</Text>!
+          </Text>
+        </View>
+        <View className="flex-1 gap-2 p-3">
+          <Stack.Screen
+            options={{
+              title: 'Login',
+              headerStyle: { backgroundColor: '#FF1E00' },
+              headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
+              headerTintColor: 'white',
+              headerBackTitle: 'Back',
+            }}
           />
+          <View className="p-2">
+            <Text className="text-xl font-bold text-yellow-300">Email</Text>
+            <TextInput
+              className="rounded border border-gray-600 bg-white p-4"
+              onChangeText={setEmail}
+              value={email}
+              placeholder="email@address.com"
+              autoCapitalize="none"
+            />
+          </View>
+          <View className="p-2">
+            <Text className="text-xl font-bold text-yellow-300">Password</Text>
+            <TextInput
+              className="rounded border border-gray-600 bg-white p-4"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry
+              placeholder="******"
+              autoCapitalize="none"
+            />
+          </View>
+          <View className="flex-1" />
+          <View className="mb-5 mt-5 gap-3 p-2">
+            <Pressable
+              className="items-center p-3"
+              onPress={() => {
+                router.push('/(auth)/register');
+              }}>
+              <Text className="text-xl font-bold text-white">Don't have an account? Sign Up</Text>
+            </Pressable>
+            <Pressable
+              className="items-center rounded-lg bg-[#ff1e00] p-3 shadow-md shadow-black"
+              disabled={loading}
+              onPress={signInWithEmail}>
+              <Text className="text-xl font-bold text-white">Sign In</Text>
+            </Pressable>
+          </View>
         </View>
-        <View className="p-2">
-          <Text className="text-xl font-bold text-yellow-300">Password</Text>
-          <TextInput
-            className="rounded border border-gray-600 bg-white p-4"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry
-            placeholder="******"
-            autoCapitalize="none"
-          />
-        </View>
-        <View className="flex-1" />
-        <View className="mb-5 mt-5 gap-3 p-2">
-          <Pressable
-            className="items-center p-3"
-            onPress={() => {
-              router.push('/(auth)/register');
-            }}>
-            <Text className="text-xl font-bold text-white">Don't have an account? Sign Up</Text>
-          </Pressable>
-          <Pressable
-            className="items-center rounded-lg bg-[#ff1e00] p-3 shadow-md shadow-black"
-            disabled={loading}
-            onPress={signInWithEmail}>
-            <Text className="text-xl font-bold text-white">Sign In</Text>
-          </Pressable>
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 }
