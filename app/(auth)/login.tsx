@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 
+//@ts-ignore
 import bg from '../../assets/bg.jpg';
 
 import { useAuth } from '~/context/AuthContext';
@@ -40,7 +41,7 @@ export default function Login() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={100}>
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
         <View className="mb-20 mt-3 items-center p-3">
           <Text className="text-4xl font-bold text-red-600">
@@ -65,6 +66,7 @@ export default function Login() {
               value={email}
               placeholder="email@address.com"
               autoCapitalize="none"
+              keyboardType="email-address"
             />
           </View>
           <View className="p-2">

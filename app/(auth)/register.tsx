@@ -42,7 +42,7 @@ export default function Register() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={100}>
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
         <View className="mb-20 mt-3 items-center p-3">
           <Text className="text-4xl font-bold text-red-600">Create an account</Text>
@@ -65,6 +65,7 @@ export default function Register() {
               value={email}
               placeholder="email@address.com"
               autoCapitalize="none"
+              keyboardType="email-address"
             />
           </View>
           <View className="p-2">
