@@ -2,7 +2,8 @@ import { Redirect, router, Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, View, TextInput, Pressable, Text, ImageBackground } from 'react-native';
 
-import bg from '~/assets/bg.jpg';
+import bg from '../../assets/bg.jpg';
+
 import { useAuth } from '~/context/AuthContext';
 import { supabase } from '~/utils/supabase';
 
@@ -45,7 +46,7 @@ export default function Login() {
           }}
         />
         <View className="p-2">
-          <Text className="text-xl font-bold text-[#FFD700]">Email</Text>
+          <Text className="text-xl font-bold text-yellow-300">Email</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-4"
             onChangeText={setEmail}
@@ -55,7 +56,7 @@ export default function Login() {
           />
         </View>
         <View className="p-2">
-          <Text className="text-xl font-bold text-[#FFD700]">Password</Text>
+          <Text className="text-xl font-bold text-yellow-300">Password</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-4"
             onChangeText={setPassword}
@@ -75,7 +76,7 @@ export default function Login() {
             <Text className="text-xl font-bold text-white">Don't have an account? Sign Up</Text>
           </Pressable>
           <Pressable
-            className="items-center rounded-lg bg-[#ff1e00] p-3"
+            className="items-center rounded-lg bg-[#ff1e00] p-3 shadow-md shadow-black"
             disabled={loading}
             onPress={signInWithEmail}>
             <Text className="text-xl font-bold text-white">Sign In</Text>

@@ -45,7 +45,7 @@ export default function Register() {
           }}
         />
         <View className="p-2">
-          <Text className="text-xl font-bold text-[#FFD700]">Email</Text>
+          <Text className="text-xl font-bold text-yellow-300">Email</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-4"
             onChangeText={setEmail}
@@ -55,7 +55,7 @@ export default function Register() {
           />
         </View>
         <View className="p-2">
-          <Text className="text-xl font-bold text-[#FFD700]">Password</Text>
+          <Text className="text-xl font-bold text-yellow-300">Password</Text>
           <TextInput
             className="rounded border border-gray-600 bg-white p-4"
             onChangeText={setPassword}
@@ -75,7 +75,7 @@ export default function Register() {
             <Text className="text-xl font-bold text-white">Already have an account? Sign In</Text>
           </Pressable>
           <Pressable
-            className="items-center rounded-lg bg-[#FF1E00] p-3"
+            className="items-center rounded-lg bg-[#FF1E00] p-3 shadow-md shadow-black"
             disabled={loading}
             onPress={signUpWithEmail}>
             <Text className="text-lg font-bold text-white">Sign Up</Text>
