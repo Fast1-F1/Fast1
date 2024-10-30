@@ -44,9 +44,7 @@ export default function Login() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
         <View className="mb-20 mt-3 items-center p-3">
-          <Text className="text-4xl font-bold text-red-600">
-            Welcome to <Text className="text-white">Fast1</Text>!
-          </Text>
+          <Text className="text-3xl font-bold text-white">Welcome!</Text>
         </View>
         <View className="flex-1 gap-2 p-3">
           <Stack.Screen
