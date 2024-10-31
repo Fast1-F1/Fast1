@@ -43,8 +43,8 @@ export default function Login() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
       <ImageBackground source={bg} resizeMode="cover" className="h-full w-full">
-        <View className="mb-20 mt-3 items-center p-3">
-          <Text className="text-3xl font-bold text-white">Welcome!</Text>
+        <View className="mb-20 mt-5 items-center p-3">
+          <Text className="mb-5 text-3xl font-bold text-white">Welcome!</Text>
         </View>
         <View className="flex-1 gap-2 p-3">
           <Stack.Screen
@@ -59,23 +59,25 @@ export default function Login() {
           <View className="p-2">
             <Text className="text-xl font-bold text-yellow-300">Email</Text>
             <TextInput
-              className="rounded border border-gray-600 bg-white p-4"
+              className="rounded border border-gray-600 bg-gray-200 p-4"
               onChangeText={setEmail}
               value={email}
               placeholder="email@address.com"
               autoCapitalize="none"
               keyboardType="email-address"
+              placeholderTextColor="black"
             />
           </View>
           <View className="p-2">
             <Text className="text-xl font-bold text-yellow-300">Password</Text>
             <TextInput
-              className="rounded border border-gray-600 bg-white p-4"
+              className="rounded border border-gray-600 bg-gray-200 p-4"
               onChangeText={setPassword}
               value={password}
               secureTextEntry
               placeholder="******"
               autoCapitalize="none"
+              placeholderTextColor="black"
             />
           </View>
           <View className="flex-1" />
