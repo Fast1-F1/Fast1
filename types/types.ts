@@ -1,22 +1,26 @@
+export type Location = {
+  lat: string;
+  long: string;
+  locality?: string;
+  country: string;
+};
+
 export type Constructor = {
-  Constructor: {
-    name: string;
-    constructorId: string;
-  };
-  position: string;
-  points: string;
-  wins: string;
+  constructorId: string;
+  name: string;
+  nationality?: string;
+  url?: string;
 };
 
 export type Driver = {
-  position: string;
-  points: string;
-  wins: string;
-  Driver: {
-    givenName: string;
-    familyName: string;
-    driverId: string;
-  };
+  driverId: string;
+  permanentNumber?: string;
+  code?: string;
+  givenName: string;
+  familyName: string;
+  dateOfBirth?: string;
+  nationality?: string;
+  url?: string;
 };
 
 export type Race = {
@@ -24,58 +28,27 @@ export type Race = {
   raceName: string;
   date: string;
   Circuit: {
-    Location: {
-      country: string;
-      long: string;
-      lat: string;
-    };
+    Location: Location;
   };
 };
 
 export type RaceResults = {
   position: string;
   status: string;
-  Driver: {
-    familyName: string;
-    givenName: string;
-  };
-  Constructor: {
-    name: string;
-  };
-  Time: {
+  Driver: Driver;
+  Constructor: Constructor;
+  Time?: {
     time: string;
   };
 };
 
 export type QualifyingResults = {
   position: string;
-  Driver: {
-    driverId: string;
-    givenName: string;
-    familyName: string;
-    dateOfBirth: string;
-    nationality: string;
-  };
-  Constructor: {
-    constructorId: string;
-    name: string;
-    nationality: string;
-  };
+  Driver: Driver;
+  Constructor: Constructor;
   Q1: string;
   Q2?: string;
   Q3?: string;
-};
-
-export type News = {
-  id: string;
-  dataSourceIdentifier: string;
-  description: string;
-  headline: string;
-  images: {
-    url: string;
-    caption?: string;
-  }[];
-  link: string;
 };
 
 export type SprintResult = {
@@ -83,22 +56,8 @@ export type SprintResult = {
   position: string;
   positionText: string;
   points: string;
-  Driver: {
-    driverId: string;
-    permanentNumber?: string;
-    code?: string;
-    url: string;
-    givenName: string;
-    familyName: string;
-    dateOfBirth: string;
-    nationality: string;
-  };
-  Constructor: {
-    constructorId: string;
-    url: string;
-    name: string;
-    nationality: string;
-  };
+  Driver: Driver;
+  Constructor: Constructor;
   grid: string;
   laps: string;
   status: string;
@@ -125,12 +84,7 @@ export type SprintRace = {
   Circuit: {
     circuitId: string;
     circuitName: string;
-    Location: {
-      lat: string;
-      long: string;
-      locality: string;
-      country: string;
-    };
+    Location: Location;
   };
   date: string;
   time: string;
