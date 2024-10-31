@@ -22,9 +22,10 @@ export default function RaceResultPage() {
   const { round } = useLocalSearchParams();
 
   useEffect(() => {
+    const BASE_URL = `https://ergast.com/api/f1/current/${round}`;
     const fetchRaceResults = async () => {
       try {
-        const response = await fetch(`https://ergast.com/api/f1/current/${round}/results.json`);
+        const response = await fetch(`${BASE_URL}/results.json`);
         const data = await response.json();
         const race = data.MRData.RaceTable.Races[0];
 
@@ -42,7 +43,7 @@ export default function RaceResultPage() {
 
     const fetchSprintResults = async () => {
       try {
-        const response = await fetch(`https://ergast.com/api/f1/current/${round}/sprint.json`);
+        const response = await fetch(`${BASE_URL}/sprint.json`);
         const data = await response.json();
         const race = data.MRData.RaceTable.Races[0];
 
@@ -60,7 +61,7 @@ export default function RaceResultPage() {
 
     const fetchQualifyingResults = async () => {
       try {
-        const response = await fetch(`https://ergast.com/api/f1/current/${round}/qualifying.json`);
+        const response = await fetch(`${BASE_URL}/qualifying.json`);
         const data = await response.json();
         const qualifying = data.MRData.RaceTable.Races[0];
 
