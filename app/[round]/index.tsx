@@ -5,6 +5,12 @@ import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 
+import {
+  fetchRaceResults,
+  fetchSprintResults,
+  fetchQualifyingResults,
+} from '../../utils/fetchResults';
+
 import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
 import SprintResultsItem from '~/components/SprintResultsItem';
@@ -14,72 +20,54 @@ export default function RaceResultPage() {
   const [results, setResults] = useState<RaceResults[]>([]);
   const [qualifyingResults, setQualifyingResults] = useState<QualifyingResults[]>([]);
   const [sprintResults, setSprintResults] = useState<SprintResult[]>([]);
-  const [raceErrorMessage, setRaceErrorMessage] = useState<string | null>(null);
-  const [sprintErrorMessage, setSprintErrorMessage] = useState<string | null>(null);
-  const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | null>(null);
+  const [raceErrorMessage, setRaceErrorMessage] = useState<string | undefined>(undefined);
+  const [sprintErrorMessage, setSprintErrorMessage] = useState<string | undefined>(undefined);
+  const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | undefined>(
+    undefined
+  );
 
   const [loading, setLoading] = useState(true);
-  const { round } = useLocalSearchParams();
+  const { round } = useLocalSearchParams<{ round?: string }>();
 
   useEffect(() => {
-    const BASE_URL = `https://ergast.com/api/f1/current/${round}`;
-    const fetchRaceResults = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/results.json`);
-        const data = await response.json();
-        const race = data.MRData.RaceTable.Races[0];
+    const fetchData = async () => {
+      if (!round) {
+        setLoading(false);
+        return;
+      }
+      setLoading(true);
 
-        if (race && race.Results && race.Results.length > 0) {
-          setResults(race.Results);
-          setRaceErrorMessage(null);
+      try {
+        const raceData = await fetchRaceResults(round);
+        if (raceData.results.length > 0) {
+          setResults(raceData.results);
+          setRaceErrorMessage(undefined);
         } else {
-          setRaceErrorMessage('This race has not occurred yet. Please check back later.');
+          setRaceErrorMessage(raceData.errorMessage);
+        }
+
+        const sprintData = await fetchSprintResults(round);
+        if (sprintData.results.length > 0) {
+          setSprintResults(sprintData.results);
+          setSprintErrorMessage(undefined);
+        } else {
+          setSprintErrorMessage(sprintData.errorMessage);
+        }
+
+        const qualifyingData = await fetchQualifyingResults(round);
+        if (qualifyingData.results.length > 0) {
+          setQualifyingResults(qualifyingData.results);
+          setQualifyingErrorMessage(undefined);
+        } else {
+          setQualifyingErrorMessage(qualifyingData.errorMessage);
         }
       } catch (error) {
         setRaceErrorMessage('An error occurred while fetching the race results.');
-        console.error(error);
-      }
-    };
-
-    const fetchSprintResults = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/sprint.json`);
-        const data = await response.json();
-        const race = data.MRData.RaceTable.Races[0];
-
-        if (race && race.SprintResults && race.SprintResults.length > 0) {
-          setSprintResults(race.SprintResults);
-          setSprintErrorMessage(null);
-        } else {
-          setSprintErrorMessage('Sprint race results are not available for this round.');
-        }
-      } catch (error) {
         setSprintErrorMessage('An error occurred while fetching the sprint race results.');
-        console.error(error);
-      }
-    };
-
-    const fetchQualifyingResults = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/qualifying.json`);
-        const data = await response.json();
-        const qualifying = data.MRData.RaceTable.Races[0];
-
-        if (qualifying && qualifying.QualifyingResults && qualifying.QualifyingResults.length > 0) {
-          setQualifyingResults(qualifying.QualifyingResults);
-          setQualifyingErrorMessage(null);
-        } else {
-          setQualifyingErrorMessage('No qualifying data available for this race.');
-        }
-      } catch (error) {
         setQualifyingErrorMessage('An error occurred while fetching the qualifying results.');
         console.error(error);
       }
-    };
 
-    const fetchData = async () => {
-      setLoading(true);
-      await Promise.all([fetchRaceResults(), fetchQualifyingResults(), fetchSprintResults()]);
       setLoading(false);
     };
 
