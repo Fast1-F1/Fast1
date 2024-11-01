@@ -22,6 +22,22 @@ export type Driver = {
   nationality?: string;
   url?: string;
 };
+export type DriverStanding = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Driver: Driver;
+  Constructors: Constructor[];
+};
+
+export type ConstructorStanding = {
+  position: string;
+  positionText: string;
+  points: string;
+  wins: string;
+  Constructor: Constructor;
+};
 
 export type Race = {
   round: string;

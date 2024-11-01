@@ -35,6 +35,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "permissions": ["VIBRATE", "RECEIVE_BOOT_COMPLETED"],
+      "notification": {
+        "icon": "./assets/icon.png",
+        "color": "#FF1E00"
       }
     }
   }

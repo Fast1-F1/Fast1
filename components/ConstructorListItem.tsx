@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
 
-import { Constructor } from '~/types/types';
+import { ConstructorStanding } from '~/types/types';
 
-export default function ConstructorListItem({ item }: { item: Constructor }) {
+export default function ConstructorListItem({ item }: { item: ConstructorStanding }) {
   return (
     <View className="m-2 flex-row  items-center gap-3 bg-[#2a2a2a] p-3">
       <Text className="mr-8 w-10 text-lg text-white">{item.position}</Text>

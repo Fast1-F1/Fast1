@@ -3,10 +3,10 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
 import DriverListItem from '~/components/DriverListItem';
-import { Driver } from '~/types/types';
+import { DriverStanding } from '~/types/types';
 
 export default function DriverStandings() {
   const [drivers, setDrivers] = useState([]);
@@ -49,7 +49,7 @@ export default function DriverStandings() {
       <Stack.Screen options={{ title: 'Drivers Standings' }} />
       <FlashList
         data={drivers}
-        keyExtractor={(item: Driver) => item.Driver.familyName}
+        keyExtractor={(item: DriverStanding) => item.Driver.familyName}
         renderItem={({ item }) => <DriverListItem item={item} />}
         estimatedItemSize={200}
       />

@@ -3,10 +3,10 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
 import ConstructorListItem from '~/components/ConstructorListItem';
-import { Constructor } from '~/types/types';
+import { ConstructorStanding } from '~/types/types';
 
 export default function ConstructorStandings() {
   const [constructors, setConstructors] = useState([]);
@@ -49,7 +49,7 @@ export default function ConstructorStandings() {
       <Stack.Screen options={{ title: 'Constructors Standings' }} />
       <FlashList
         data={constructors}
-        keyExtractor={(item: Constructor) => item.Constructor.name}
+        keyExtractor={(item: ConstructorStanding) => item.Constructor.name}
         renderItem={({ item }) => <ConstructorListItem item={item} />}
         estimatedItemSize={200}
       />
