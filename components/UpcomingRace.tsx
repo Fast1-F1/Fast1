@@ -6,6 +6,7 @@ import { Race } from '~/types/types';
 type NextRace = Race | null;
 
 export default function UpcomingRace() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [races, setRaces] = useState<Race[]>([]);
   const [loading, setLoading] = useState(false);
   const [nextRace, setNextRace] = useState<NextRace | null>(null);
