@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
-type Circuit = {
-  circuitId: string;
-  circuitName: string;
-  Location: {
-    locality: string;
-    country: string;
-  };
-};
-
-type Race = {
-  raceName: string;
-  Circuit: Circuit;
-  date: string;
-  time: string;
-};
+import { Race } from '~/types/types';
 
 type NextRace = Race | null;
 
@@ -34,7 +20,6 @@ export default function UpcomingRace() {
         const fetchedRaces = data.MRData.RaceTable.Races;
         setRaces(fetchedRaces);
 
-        // Find the next race after setting the state
         const upcomingRace = fetchedRaces.find(
           (race: { date: string; time: string }) =>
             new Date(`${race.date}T${race.time}`) > new Date()

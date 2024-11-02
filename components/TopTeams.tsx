@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
-import { Constructor } from '~/types/types';
+import { ConstructorStanding } from '~/types/types';
 
 export default function TopConstructors() {
   const [loading, setLoading] = useState(true);
-  const [topConstructors, setTopConstructors] = useState<Constructor[]>([]);
+  const [topConstructors, setTopConstructors] = useState<ConstructorStanding[]>([]);
 
   useEffect(() => {
     const fetchConstructorStandings = async () => {

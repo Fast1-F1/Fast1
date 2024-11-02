@@ -1,3 +1,23 @@
+export type Circuit = {
+  circuitId: string;
+  circuitName: string;
+  Location: {
+    locality: string;
+    country: string;
+  };
+};
+export type Race = {
+  raceName: string;
+  Circuit: Circuit;
+  date: string;
+  time: string;
+  round: string;
+  FirstPractice?: { date: string; time: string };
+  SecondPractice?: { date: string; time: string };
+  ThirdPractice?: { date: string; time: string };
+  Qualifying?: { date: string; time: string };
+  Sprint?: { date: string; time: string };
+};
 export type Location = {
   lat: string;
   long: string;
@@ -37,15 +57,6 @@ export type ConstructorStanding = {
   points: string;
   wins: string;
   Constructor: Constructor;
-};
-
-export type Race = {
-  round: string;
-  raceName: string;
-  date: string;
-  Circuit: {
-    Location: Location;
-  };
 };
 
 export type RaceResults = {

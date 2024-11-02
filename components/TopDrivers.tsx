@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
-import { Driver } from '~/types/types';
+import { DriverStanding } from '~/types/types';
 
 export default function TopDrivers() {
   const [loading, setLoading] = useState(true);
-  const [topDrivers, setTopDrivers] = useState<Driver[]>([]);
+  const [topDrivers, setTopDrivers] = useState<DriverStanding[]>([]);
 
   useEffect(() => {
     const fetchDriverStandings = async () => {
