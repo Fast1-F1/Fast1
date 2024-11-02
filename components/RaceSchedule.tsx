@@ -18,6 +18,11 @@ export default function RaceSchedule() {
         const data = await response.json();
         const fetchedRaceSchedule = data.MRData.RaceTable.Races;
         setSchedule(fetchedRaceSchedule);
+        const upcomingRace = fetchedRaceSchedule.find(
+          (race: { date: string; time: string }) =>
+            new Date(`${race.date}T${race.time}`) > new Date()
+        );
+        setNextRace(upcomingRace);
       } catch (error) {
         console.log('An error occured while fetching data', error);
       } finally {
@@ -33,9 +38,40 @@ export default function RaceSchedule() {
 
   return (
     <View className="flex-1 p-4">
-      <Text className="text-3xl font-bold text-white">Race Schedule</Text>
-      <View>
-        <Text>{}</Text>
+      <Text className="mb-2 text-3xl font-bold text-white">Race Schedule</Text>
+      <View className="bg-[#2a2a2a] p-2">
+        <View className="gap-2">
+          {nextRace?.FirstPractice?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Free Practice 1 : {nextRace?.FirstPractice.date} - {nextRace?.FirstPractice?.time}
+            </Text>
+          )}
+          {nextRace?.SecondPractice?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Free Practice 2 : {nextRace?.SecondPractice.date} - {nextRace?.SecondPractice?.time}
+            </Text>
+          )}
+          {nextRace?.ThirdPractice?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Free Practice 2 : {nextRace?.ThirdPractice.date} - {nextRace?.ThirdPractice?.time}
+            </Text>
+          )}
+          {nextRace?.Sprint?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Sprint Race : {nextRace?.Sprint?.date} - {nextRace?.Sprint?.time}
+            </Text>
+          )}
+          {nextRace?.Qualifying?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Qualifying : {nextRace?.Qualifying?.date} - {nextRace?.Qualifying?.time}
+            </Text>
+          )}
+          {nextRace?.time && (
+            <Text className="text-lg font-semibold text-white">
+              Race : {nextRace?.date} - {nextRace?.time}
+            </Text>
+          )}
+        </View>
       </View>
     </View>
   );
