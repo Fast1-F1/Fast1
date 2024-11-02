@@ -37,6 +37,8 @@ export default function RaceSchedule() {
     return <ActivityIndicator />;
   }
 
+  //{new Date(`${nextRace.date}T${nextRace.time}`).toLocaleString()}
+
   return (
     <View className="flex-1 p-4">
       <Text className="mb-2 text-3xl font-bold text-white">Race Schedule</Text>
@@ -44,32 +46,45 @@ export default function RaceSchedule() {
         <View className="gap-2">
           {nextRace?.FirstPractice?.time && (
             <Text className="text-lg font-semibold text-white">
-              Free Practice 1 : {nextRace?.FirstPractice.date} - {nextRace?.FirstPractice?.time}
+              Free Practice 1 :{' '}
+              {new Date(
+                `${nextRace.FirstPractice?.date}T${nextRace.FirstPractice?.time}`
+              ).toLocaleString()}
             </Text>
           )}
           {nextRace?.SecondPractice?.time && (
             <Text className="text-lg font-semibold text-white">
-              Free Practice 2 : {nextRace?.SecondPractice.date} - {nextRace?.SecondPractice?.time}
+              Free Practice 2 :{' '}
+              {new Date(
+                `${nextRace.SecondPractice?.date}T${nextRace.SecondPractice?.time}`
+              ).toLocaleString()}
             </Text>
           )}
           {nextRace?.ThirdPractice?.time && (
             <Text className="text-lg font-semibold text-white">
-              Free Practice 2 : {nextRace?.ThirdPractice.date} - {nextRace?.ThirdPractice?.time}
+              Free Practice 2 :{' '}
+              {new Date(
+                `${nextRace.ThirdPractice?.date}T${nextRace.ThirdPractice?.time}`
+              ).toLocaleString()}
             </Text>
           )}
           {nextRace?.Sprint?.time && (
             <Text className="text-lg font-semibold text-white">
-              Sprint Race : {nextRace?.Sprint?.date} - {nextRace?.Sprint?.time}
+              Sprint Race :{' '}
+              {new Date(`${nextRace.Sprint?.date}T${nextRace.Sprint?.time}`).toLocaleString()}
             </Text>
           )}
           {nextRace?.Qualifying?.time && (
             <Text className="text-lg font-semibold text-white">
-              Qualifying : {nextRace?.Qualifying?.date} - {nextRace?.Qualifying?.time}
+              Qualifying :{' '}
+              {new Date(
+                `${nextRace.Qualifying?.date}T${nextRace.Qualifying?.time}`
+              ).toLocaleString()}
             </Text>
           )}
           {nextRace?.time && (
             <Text className="text-lg font-semibold text-white">
-              Race : {nextRace?.date} - {nextRace?.time}
+              Race : {new Date(`${nextRace?.date}T${nextRace?.time}`).toLocaleString()}
             </Text>
           )}
         </View>
