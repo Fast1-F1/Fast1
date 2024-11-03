@@ -1,3 +1,4 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
@@ -37,55 +38,91 @@ export default function RaceSchedule() {
     return <ActivityIndicator />;
   }
 
-  //{new Date(`${nextRace.date}T${nextRace.time}`).toLocaleString()}
-
   return (
     <View className="flex-1 p-4">
       <Text className="mb-2 text-3xl font-bold text-white">Race Schedule</Text>
       <View className="bg-[#2a2a2a] p-2">
         <View className="gap-2">
           {nextRace?.FirstPractice?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Free Practice 1 :{' '}
-              {new Date(
-                `${nextRace.FirstPractice?.date}T${nextRace.FirstPractice?.time}`
-              ).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Free Practice 1 :{' '}
+                {new Date(
+                  `${nextRace.FirstPractice?.date}T${nextRace.FirstPractice?.time}`
+                ).toLocaleString()}
+              </Text>
+              {nextRace?.FirstPractice?.date &&
+                nextRace?.FirstPractice?.time &&
+                new Date(`${nextRace.FirstPractice.date}T${nextRace.FirstPractice.time}`) <=
+                  new Date() && <MaterialIcons name="check" size={24} color="green" />}
+            </View>
           )}
           {nextRace?.SecondPractice?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Free Practice 2 :{' '}
-              {new Date(
-                `${nextRace.SecondPractice?.date}T${nextRace.SecondPractice?.time}`
-              ).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Free Practice 2 :{' '}
+                {new Date(
+                  `${nextRace.SecondPractice?.date}T${nextRace.SecondPractice?.time}`
+                ).toLocaleString()}
+              </Text>
+              {nextRace?.SecondPractice?.date &&
+                nextRace?.SecondPractice?.time &&
+                new Date(`${nextRace.SecondPractice.date}T${nextRace.SecondPractice.time}`) <=
+                  new Date() && <MaterialIcons name="check" size={24} color="green" />}
+            </View>
           )}
           {nextRace?.ThirdPractice?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Free Practice 2 :{' '}
-              {new Date(
-                `${nextRace.ThirdPractice?.date}T${nextRace.ThirdPractice?.time}`
-              ).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Free Practice 2 :{' '}
+                {new Date(
+                  `${nextRace.ThirdPractice?.date}T${nextRace.ThirdPractice?.time}`
+                ).toLocaleString()}
+              </Text>
+              {nextRace?.ThirdPractice?.date &&
+                nextRace?.ThirdPractice?.time &&
+                new Date(`${nextRace.ThirdPractice.date}T${nextRace.ThirdPractice.time}`) <=
+                  new Date() && <MaterialIcons name="check" size={24} color="green" />}
+            </View>
           )}
           {nextRace?.Sprint?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Sprint Race :{' '}
-              {new Date(`${nextRace.Sprint?.date}T${nextRace.Sprint?.time}`).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Sprint Race :{' '}
+                {new Date(`${nextRace.Sprint?.date}T${nextRace.Sprint?.time}`).toLocaleString()}
+              </Text>
+              {nextRace?.Sprint?.date &&
+                nextRace?.Sprint?.time &&
+                new Date(`${nextRace.Sprint.date}T${nextRace.Sprint.time}`) <= new Date() && (
+                  <MaterialIcons name="check" size={24} color="green" />
+                )}
+            </View>
           )}
           {nextRace?.Qualifying?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Qualifying :{' '}
-              {new Date(
-                `${nextRace.Qualifying?.date}T${nextRace.Qualifying?.time}`
-              ).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Qualifying :{' '}
+                {new Date(
+                  `${nextRace.Qualifying?.date}T${nextRace.Qualifying?.time}`
+                ).toLocaleString()}
+              </Text>
+              {nextRace?.Qualifying?.date &&
+                nextRace?.Qualifying?.time &&
+                new Date(`${nextRace.Qualifying.date}T${nextRace.Qualifying.time}`) <=
+                  new Date() && <MaterialIcons name="check" size={24} color="green" />}
+            </View>
           )}
           {nextRace?.time && (
-            <Text className="text-lg font-semibold text-white">
-              Race : {new Date(`${nextRace?.date}T${nextRace?.time}`).toLocaleString()}
-            </Text>
+            <View className="flex-row">
+              <Text className="flex-1 text-lg font-semibold text-white">
+                Race : {new Date(`${nextRace?.date}T${nextRace?.time}`).toLocaleString()}
+              </Text>
+              {nextRace?.date &&
+                nextRace?.time &&
+                new Date(`${nextRace.date}T${nextRace.time}`) <= new Date() && (
+                  <MaterialIcons name="check" size={24} color="green" />
+                )}
+            </View>
           )}
         </View>
       </View>
