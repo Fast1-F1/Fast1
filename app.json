@@ -27,8 +27,6 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.anilyavas.fast1",
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
