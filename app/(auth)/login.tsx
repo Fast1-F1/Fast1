@@ -1,5 +1,6 @@
+import { AntDesign } from '@expo/vector-icons';
 import { Redirect, router, Stack } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   View,
@@ -23,9 +24,12 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  if (user) {
-    return <Redirect href="/" />;
-  }
+  useEffect(() => {
+    if (user) {
+      router.push('/');
+    }
+  }, [user]);
+
   async function signInWithEmail() {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
@@ -37,6 +41,21 @@ export default function Login() {
     setLoading(false);
     router.push('/');
   }
+
+  const signInWithGoogle = async (): Promise<void> => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) {
+        console.error('Error loggin in with Google', error.message);
+      } else {
+        router.push('/');
+      }
+    } catch (e) {
+      console.error('Unexpected error during Google sign-in:', e);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -88,6 +107,12 @@ export default function Login() {
                 router.push('/(auth)/register');
               }}>
               <Text className="text-xl font-bold text-white">Don't have an account? Sign Up</Text>
+            </Pressable>
+            <Pressable
+              onPress={signInWithGoogle}
+              className="mx-auto w-full flex-row items-center justify-center gap-4 rounded border border-white p-2">
+              <AntDesign name="google" color="white" size={30} />
+              <Text className="text-xl font-bold text-white">Sign in with Google</Text>
             </Pressable>
             <Pressable
               className="items-center rounded-lg bg-[#ff1e00] p-3 shadow-md shadow-black"
