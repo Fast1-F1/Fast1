@@ -38,5 +38,9 @@ export const NotificationProvider = ({ children }: PropsWithChildren) => {
         Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
+
+  console.log('expoPushToken', expoPushToken);
+  console.log('notificationobject', notification);
+
   return <>{children}</>;
 };
