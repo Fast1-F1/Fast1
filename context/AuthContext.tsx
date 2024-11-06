@@ -1,4 +1,4 @@
-import { Session, User } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
