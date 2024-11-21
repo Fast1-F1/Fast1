@@ -1,6 +1,6 @@
 # Fast1 Formula 1 App
 
-Seasonally updated Formula 1 races content with races, drivers, and information about races with race results. Current standings for drivers and constructors championship. Social media posts from official F1 X account.
+Seasonally updated Formula 1 races content with races, drivers, and information about races with race results. Current standings for drivers and constructors championship. Social media posts from official F1 X account. Now available for Closed Testing on Google Play Store. Soon to be published...
 
 ## API Reference
 
