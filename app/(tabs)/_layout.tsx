@@ -1,4 +1,9 @@
-import { Feather, FontAwesome5, MaterialCommunityIcons, FontAwesome6 } from '@expo/vector-icons';
+import {
+  FontAwesome5,
+  MaterialCommunityIcons,
+  FontAwesome6,
+  FontAwesome,
+} from '@expo/vector-icons';
 import { Redirect, Tabs } from 'expo-router';
 
 import { useAuth } from '~/context/AuthContext';
@@ -27,6 +32,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="drivers"
+        options={{
+          title: 'Drivers',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="races"
         options={{
           title: 'Races',
@@ -37,16 +51,16 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Driver Standings',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <FontAwesome name="trophy" size={30} color={color} />,
         }}
       />
       <Tabs.Screen
         name="three"
         options={{
           title: 'Constructor Standings',
-          tabBarIcon: ({ color }) => <Feather name="bar-chart-2" size={30} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="podium" size={30} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
