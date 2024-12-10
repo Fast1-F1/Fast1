@@ -1,3 +1,4 @@
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -15,6 +16,8 @@ import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
 import SprintResultsItem from '~/components/SprintResultsItem';
 import { RaceResults, QualifyingResults, SprintResult } from '~/types/types';
+
+const Tab = createMaterialTopTabNavigator();
 
 export default function RaceResultPage() {
   const [results, setResults] = useState<RaceResults[]>([]);
@@ -73,6 +76,10 @@ export default function RaceResultPage() {
 
     fetchData();
   }, [round]);
+
+  const RaceResultsTab = (results: RaceResults, errorMessage: string | null) => {};
+  const SprintResultsTab = (results: SprintResult, errorMessage: string | null) => {};
+  const QualifyingResultsTab = (results: QualifyingResults, errorMessage: string | null) => {};
 
   if (loading) {
     return (
