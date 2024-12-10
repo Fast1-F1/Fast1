@@ -1,8 +1,7 @@
-import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import {
   fetchRaceResults,
@@ -13,6 +12,7 @@ import {
 import Loading from '~/components/Loading';
 import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
+import ResultsSection from '~/components/ResultsSection';
 import SprintResultsItem from '~/components/SprintResultsItem';
 import { RaceResults, QualifyingResults, SprintResult } from '~/types/types';
 
@@ -102,56 +102,27 @@ export default function RaceResultPage() {
           headerBackTitle: 'Back',
         }}
       />
-      {raceErrorMessage ? (
-        <View style={{ padding: 20 }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>{raceErrorMessage}</Text>
-        </View>
-      ) : (
-        <>
-          <Text className="p-2 text-xl font-bold text-white">Race Results</Text>
-          <FlashList
-            data={results}
-            keyExtractor={(item: RaceResults) => item.Driver.familyName}
-            renderItem={({ item }) => <RaceResultsItem item={item} />}
-            scrollEnabled={false}
-            estimatedItemSize={200}
-          />
-        </>
-      )}
-
-      {sprintErrorMessage ? (
-        <View style={{ padding: 20 }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>{sprintErrorMessage}</Text>
-        </View>
-      ) : (
-        <>
-          <Text className="p-2 text-xl font-bold text-white">Sprint Race Results</Text>
-          <FlashList
-            data={sprintResults}
-            keyExtractor={(item) => `${round}-${item.Driver.driverId}-${item.position}`}
-            renderItem={({ item }) => <SprintResultsItem item={item} />}
-            estimatedItemSize={30}
-          />
-        </>
-      )}
-
-      {qualifyingErrorMessage ? (
-        <View style={{ padding: 20 }}>
-          <Text style={{ color: 'white', textAlign: 'center' }}>{qualifyingErrorMessage}</Text>
-        </View>
-      ) : (
-        <>
-          <Text className="p-2 text-xl font-bold text-white">Qualifying Results</Text>
-          <FlashList
-            data={qualifyingResults}
-            keyExtractor={(item: QualifyingResults) => item.Driver.familyName}
-            renderItem={({ item }) => <QualifyingResultsItem item={item} />}
-            scrollEnabled={false}
-            estimatedItemSize={200}
-          />
-        </>
-      )}
-
+      <ResultsSection
+        title="Race Results"
+        results={results}
+        errorMessage={raceErrorMessage}
+        renderItem={({ item }) => <RaceResultsItem item={item} />}
+        keyExtractor={(item: RaceResults) => item.Driver.familyName}
+      />
+      <ResultsSection
+        title="Sprint Race Results"
+        results={sprintResults}
+        errorMessage={sprintErrorMessage}
+        renderItem={({ item }) => <SprintResultsItem item={item} />}
+        keyExtractor={(item) => `${round}-${item.Driver.driverId}-${item.position}`}
+      />
+      <ResultsSection
+        title="Qualifying Results"
+        results={qualifyingResults}
+        errorMessage={qualifyingErrorMessage}
+        renderItem={({ item }) => <QualifyingResultsItem item={item} />}
+        keyExtractor={(item: QualifyingResults) => item.Driver.familyName}
+      />
       <StatusBar style="light" />
     </ScrollView>
   );
