@@ -1,6 +1,8 @@
+import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
+import DriverInformationItem from '~/components/DriverInformationItem';
 import Loading from '~/components/Loading';
 import { DriverInformation } from '~/types/types';
 
@@ -29,7 +31,13 @@ export default function DriversScreen() {
 
   return (
     <View className="flex-1 bg-[#11100f]">
-      <Text className="p-2 text-center text-2xl font-bold text-white">Drivers of the Season</Text>
+      <FlashList
+        contentContainerClassName="p-4"
+        data={drivers}
+        keyExtractor={(item) => item.driverId}
+        estimatedItemSize={25}
+        renderItem={({ item }) => <DriverInformationItem driverInformation={item} />}
+      />
     </View>
   );
 }
