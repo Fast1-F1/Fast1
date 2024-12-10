@@ -1,11 +1,11 @@
 import { FlashList } from '@shopify/flash-list';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import DriverListItem from '~/components/DriverListItem';
+import Loading from '~/components/Loading';
 import { DriverStanding } from '~/types/types';
 
 export default function DriverStandings() {
@@ -25,21 +25,10 @@ export default function DriverStandings() {
 
   if (loading) {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#11100f',
-        }}>
+      <>
         <Stack.Screen options={{ title: 'Driver Standings' }} />
-        <LottieView
-          source={require('../../assets/animations/loading.json')}
-          autoPlay
-          loop
-          style={{ width: 150, height: 150 }}
-        />
-      </View>
+        <Loading />
+      </>
     );
   }
 

@@ -1,8 +1,6 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import LottieView from 'lottie-react-native';
 import { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 
@@ -12,12 +10,11 @@ import {
   fetchQualifyingResults,
 } from '../../utils/fetchResults';
 
+import Loading from '~/components/Loading';
 import QualifyingResultsItem from '~/components/QualifyingResultsItem';
 import RaceResultsItem from '~/components/RaceResultsItem';
 import SprintResultsItem from '~/components/SprintResultsItem';
 import { RaceResults, QualifyingResults, SprintResult } from '~/types/types';
-
-const Tab = createMaterialTopTabNavigator();
 
 export default function RaceResultPage() {
   const [results, setResults] = useState<RaceResults[]>([]);
@@ -77,19 +74,9 @@ export default function RaceResultPage() {
     fetchData();
   }, [round]);
 
-  const RaceResultsTab = (results: RaceResults, errorMessage: string | null) => {};
-  const SprintResultsTab = (results: SprintResult, errorMessage: string | null) => {};
-  const QualifyingResultsTab = (results: QualifyingResults, errorMessage: string | null) => {};
-
   if (loading) {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#11100f',
-        }}>
+      <>
         <Stack.Screen
           options={{
             title: 'Race and Qualifying Result',
@@ -99,13 +86,8 @@ export default function RaceResultPage() {
             headerBackTitle: 'Back',
           }}
         />
-        <LottieView
-          source={require('../../assets/animations/loading.json')}
-          autoPlay
-          loop
-          style={{ width: 150, height: 150 }}
-        />
-      </View>
+        <Loading />
+      </>
     );
   }
 
