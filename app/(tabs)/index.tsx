@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, ScrollView, Image, useWindowDimensions } from 'react-native';
 
+// @ts-ignore
 import banner from '../../assets/banner.jpg';
 
 import RaceSchedule from '~/components/RaceSchedule';
