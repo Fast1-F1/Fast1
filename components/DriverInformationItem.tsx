@@ -1,6 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons';
-import { Link } from 'expo-router';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { DriverInformation } from '~/types/types';
 
@@ -15,14 +13,8 @@ export default function DriverInformationItem({
       <Text className="w-[120px] font-semibold text-white">
         {driverInformation.givenName} {driverInformation.familyName}
       </Text>
-      <Text className="w-[30px] text-white">{driverInformation.permanentNumber}</Text>
       <Text className="w-[120px] text-white">{driverInformation.nationality}</Text>
       <Text className="text-white">{driverInformation.dateOfBirth}</Text>
-      <Link href={`/${driverInformation.url}`} asChild>
-        <Pressable>
-          <FontAwesome name="arrow-circle-right" size={24} color="white" />
-        </Pressable>
-      </Link>
     </View>
   );
 }
