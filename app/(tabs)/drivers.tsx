@@ -32,10 +32,11 @@ export default function DriversScreen() {
   return (
     <View className="flex-1 bg-[#11100f]">
       <FlashList
-        contentContainerClassName="p-4"
+        contentContainerClassName="p-2"
         data={drivers}
         keyExtractor={(item) => item.driverId}
         estimatedItemSize={25}
+        scrollEnabled={false}
         renderItem={({ item }) => <DriverInformationItem driverInformation={item} />}
       />
     </View>
