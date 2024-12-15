@@ -38,11 +38,11 @@ export default function DriverWiki() {
       />
 
       {/* Conditional rendering for Loading or WebView */}
-      {loading ? (
+      {loading && (
         <View className="flex-1">
           <Loading />
         </View>
-      ) : null}
+      )}
 
       <Animated.View
         className="absolute bottom-0 left-0 right-0 top-0"

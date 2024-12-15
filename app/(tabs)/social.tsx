@@ -1,7 +1,8 @@
-import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
+
+import Loading from '~/components/Loading';
 
 export default function SocialFeed() {
   const [loading, setLoading] = useState(true);
@@ -24,40 +25,55 @@ export default function SocialFeed() {
   `;
 
   const handleLoadEnd = () => {
-    setLoading(false);
+    if (!loading) return; // Prevent re-triggering if already loaded
 
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
       useNativeDriver: true,
     }).start();
+
+    setLoading(false); // Mark loading as complete
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
+      {/* Conditionally render based on the loading state */}
       {loading && (
-        <LottieView
-          source={require('../../assets/animations/loading.json')}
-          autoPlay
-          loop
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: 150,
-            height: 150,
-            marginLeft: -75,
-            marginTop: -75,
-          }}
-        />
+        <View style={styles.loadingContainer}>
+          <Loading />
+        </View>
       )}
-      <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
+
+      {/* Render the WebView with fade-in animation */}
+      <Animated.View
+        style={[
+          styles.webViewContainer,
+          { opacity: fadeAnim, display: loading ? 'none' : 'flex' }, // Hide WebView during loading
+        ]}>
         <WebView
           source={{ html: htmlContent }}
-          onLoadStart={() => setLoading(true)}
           onLoadEnd={handleLoadEnd}
+          startInLoadingState={false}
+          style={StyleSheet.absoluteFill}
         />
       </Animated.View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#11100f',
+  },
+  loadingContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#11100f',
+  },
+  webViewContainer: {
+    flex: 1,
+  },
+});
