@@ -34,7 +34,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="drivers"
         options={{
-          title: 'Drivers',
+          title: 'Driver List',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="racing-helmet" size={30} color={color} />
           ),
