@@ -34,6 +34,7 @@ export default function DriverWiki() {
           headerBackTitle: 'Back',
           headerStyle: { backgroundColor: '#FF1E00' },
           headerTintColor: 'white',
+          headerBackTitleVisible: false,
         }}
       />
 
