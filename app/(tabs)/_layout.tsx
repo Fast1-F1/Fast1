@@ -48,19 +48,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="standings"
         options={{
-          title: 'Driver Standings',
+          title: 'Standings',
           tabBarIcon: ({ color }) => <FontAwesome name="trophy" size={30} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="three"
-        options={{
-          title: 'Constructor Standings',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="podium" size={30} color={color} />
-          ),
         }}
       />
       <Tabs.Screen
