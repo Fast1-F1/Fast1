@@ -83,7 +83,7 @@ export default function RaceResultPage() {
             headerStyle: { backgroundColor: '#FF1E00' },
             headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
             headerTintColor: 'white',
-            headerBackTitle: 'Back',
+            headerBackTitleVisible: false,
           }}
         />
         <Loading />
@@ -99,7 +99,7 @@ export default function RaceResultPage() {
           headerStyle: { backgroundColor: '#FF1E00' },
           headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
           headerTintColor: 'white',
-          headerBackTitle: 'Back',
+          headerBackTitleVisible: false,
         }}
       />
       <View className="flex-row items-center justify-around gap-5 p-4">
