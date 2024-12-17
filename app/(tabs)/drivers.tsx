@@ -12,9 +12,18 @@ export default function DriversScreen() {
 
   const fetchDriverInformation = async () => {
     try {
-      const response = await fetch('https://ergast.com/api/f1/current/drivers.json');
+      const response = await fetch('https://api.openf1.org/v1/drivers');
       const data = await response.json();
-      setDrivers(data.MRData.DriverTable.Drivers);
+      const uniqueFullNames = new Set();
+      const filteredDrivers = data.filter((driver: any) => {
+        const fullName = driver.full_name;
+        if (uniqueFullNames.has(fullName)) {
+          return false;
+        }
+        uniqueFullNames.add(fullName);
+        return true;
+      });
+      setDrivers(filteredDrivers);
     } catch (error) {
       console.log(error);
     } finally {
@@ -34,9 +43,9 @@ export default function DriversScreen() {
       <FlashList
         contentContainerClassName="p-2"
         data={drivers}
-        keyExtractor={(item) => item.driverId}
+        keyExtractor={(item) => item.full_name}
         estimatedItemSize={25}
-        scrollEnabled={false}
+        scrollEnabled
         renderItem={({ item }) => <DriverInformationItem driverInformation={item} />}
       />
     </View>

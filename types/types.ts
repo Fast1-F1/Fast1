@@ -130,11 +130,10 @@ export type SprintRaceData = {
 
 export type DriverInformation = {
   driverId: string;
-  permanentNumber?: string;
-  code?: string;
-  url: string;
-  givenName: string;
-  familyName: string;
-  dateOfBirth: string;
-  nationality: string;
+  name_acronym: string;
+  country_code: string;
+  headshot_url: string;
+  full_name: string;
+  team_name: string;
+  team_colour: string;
 };
