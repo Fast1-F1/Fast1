@@ -52,13 +52,25 @@ export default function DriverStandings() {
         <Pressable
           className="w-1/2 rounded-xl bg-red-600 p-2"
           onPress={() => setActiveStandings('drivers')}
-          style={activeStandings === 'drivers' && { borderColor: 'yellow', borderWidth: 1 }}>
+          style={
+            activeStandings === 'drivers' && {
+              borderColor: 'white',
+              borderWidth: 1,
+              backgroundColor: '#B91C1C',
+            }
+          }>
           <Text className="text-center text-xl font-bold text-white">Drivers</Text>
         </Pressable>
         <Pressable
           className="w-1/2 rounded-xl bg-red-600 p-2"
           onPress={() => setActiveStandings('constructors')}
-          style={activeStandings === 'constructors' && { borderColor: 'yellow', borderWidth: 1 }}>
+          style={
+            activeStandings === 'constructors' && {
+              borderColor: 'white',
+              borderWidth: 1,
+              backgroundColor: '#B91C1C',
+            }
+          }>
           <Text className="text-center text-xl font-bold text-white">Constructors</Text>
         </Pressable>
       </View>
