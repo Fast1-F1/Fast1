@@ -22,7 +22,7 @@ export default function AuthContextProvider({ children }: PropsWithChildren) {
 
     // Cleanup subscription on unmount
     return () => {
-      subscription?.unsubscribe();
+      subscription?.subscription.unsubscribe();
     };
   }, []);
 
