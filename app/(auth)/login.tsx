@@ -57,6 +57,7 @@ export default function Login() {
               headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
               headerTintColor: 'white',
               headerBackTitle: 'Back',
+              headerBackVisible: false,
             }}
           />
           <View className="p-2">
@@ -83,14 +84,15 @@ export default function Login() {
               placeholderTextColor="black"
             />
           </View>
-          <View className="flex-1" />
           <View className="mb-5 mt-5 gap-3 p-2">
             <Pressable
               className="items-center p-3"
               onPress={() => {
                 router.push('/(auth)/register');
               }}>
-              <Text className="text-xl font-bold text-white">Don't have an account? Sign Up</Text>
+              <Text className="text-xl font-bold text-white shadow-lg shadow-black">
+                Don't have an account? Sign Up
+              </Text>
             </Pressable>
             <Pressable
               className="items-center rounded-lg bg-[#ff1e00] p-3 shadow-md shadow-black"
