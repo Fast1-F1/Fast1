@@ -1,7 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Pressable, ScrollView, View, Text } from 'react-native';
 
 import {
   fetchRaceResults,
@@ -25,8 +25,8 @@ export default function RaceResultPage() {
   const [qualifyingErrorMessage, setQualifyingErrorMessage] = useState<string | undefined>(
     undefined
   );
-
   const [loading, setLoading] = useState(true);
+  const [selectedResult, setSelectedResult] = useState<'Race' | 'Sprint' | 'Qualifying'>('Race');
   const { round } = useLocalSearchParams<{ round?: string }>();
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function RaceResultPage() {
       <>
         <Stack.Screen
           options={{
-            title: 'Race and Qualifying Result',
+            title: 'Race and Qualifying Results',
             headerStyle: { backgroundColor: '#FF1E00' },
             headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
             headerTintColor: 'white',
@@ -95,34 +95,81 @@ export default function RaceResultPage() {
     <ScrollView className="flex-1 bg-[#11100f]">
       <Stack.Screen
         options={{
-          title: 'Race and Qualifying Result',
+          title: 'Race and Qualifying Results',
           headerStyle: { backgroundColor: '#FF1E00' },
           headerTitleStyle: { color: 'white', fontWeight: 'bold', fontSize: 20 },
           headerTintColor: 'white',
           headerBackTitle: 'Back',
         }}
       />
-      <ResultsSection
-        title="Race Results"
-        results={results}
-        errorMessage={raceErrorMessage}
-        renderItem={({ item }) => <RaceResultsItem item={item} />}
-        keyExtractor={(item: RaceResults) => item.Driver.familyName}
-      />
-      <ResultsSection
-        title="Sprint Race Results"
-        results={sprintResults}
-        errorMessage={sprintErrorMessage}
-        renderItem={({ item }) => <SprintResultsItem item={item} />}
-        keyExtractor={(item) => `${round}-${item.Driver.driverId}-${item.position}`}
-      />
-      <ResultsSection
-        title="Qualifying Results"
-        results={qualifyingResults}
-        errorMessage={qualifyingErrorMessage}
-        renderItem={({ item }) => <QualifyingResultsItem item={item} />}
-        keyExtractor={(item: QualifyingResults) => item.Driver.familyName}
-      />
+      <View className="flex-row items-center justify-around gap-5 p-4">
+        <Pressable
+          className="w-1/3 rounded-xl bg-red-600 p-1"
+          onPress={() => setSelectedResult('Race')}
+          style={
+            selectedResult === 'Race' && {
+              borderColor: 'white',
+              borderWidth: 1,
+              backgroundColor: '#B91C1C',
+            }
+          }>
+          <Text className="text-center text-xl font-bold text-white">Race</Text>
+        </Pressable>
+        <Pressable
+          className="w-1/3 rounded-xl bg-red-600 p-1"
+          onPress={() => setSelectedResult('Sprint')}
+          style={
+            selectedResult === 'Sprint' && {
+              borderColor: 'white',
+              borderWidth: 1,
+              backgroundColor: '#B91C1C',
+            }
+          }>
+          <Text className="text-center text-xl font-bold text-white">Sprint</Text>
+        </Pressable>
+        <Pressable
+          className="w-1/3 rounded-xl bg-red-600 p-1"
+          onPress={() => setSelectedResult('Qualifying')}
+          style={
+            selectedResult === 'Qualifying' && {
+              borderColor: 'white',
+              borderWidth: 1,
+              backgroundColor: '#B91C1C',
+            }
+          }>
+          <Text className="text-center text-xl font-bold text-white">Qualifying</Text>
+        </Pressable>
+      </View>
+
+      {selectedResult === 'Race' && (
+        <ResultsSection
+          title="Race Results"
+          results={results}
+          errorMessage={raceErrorMessage}
+          renderItem={({ item }) => <RaceResultsItem item={item} />}
+          keyExtractor={(item: RaceResults) => item.Driver.familyName}
+        />
+      )}
+
+      {selectedResult === 'Sprint' && (
+        <ResultsSection
+          title="Sprint Race Results"
+          results={sprintResults}
+          errorMessage={sprintErrorMessage}
+          renderItem={({ item }) => <SprintResultsItem item={item} />}
+          keyExtractor={(item) => `${round}-${item.Driver.driverId}-${item.position}`}
+        />
+      )}
+      {selectedResult === 'Qualifying' && (
+        <ResultsSection
+          title="Qualifying Results"
+          results={qualifyingResults}
+          errorMessage={qualifyingErrorMessage}
+          renderItem={({ item }) => <QualifyingResultsItem item={item} />}
+          keyExtractor={(item: QualifyingResults) => item.Driver.familyName}
+        />
+      )}
+
       <StatusBar style="light" />
     </ScrollView>
   );
