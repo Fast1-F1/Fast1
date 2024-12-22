@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react';
-import { Text } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { Text, View } from 'react-native';
+import MapView, { Marker, LatLng, Region } from 'react-native-maps';
 
 import Loading from './Loading';
 
-export default function Circuit({ circuitId }: { circuitId: string }) {
-  const [circuit, setCircuit] = useState<any>(null);
+export default function CircuitsMap() {
+  const [circuits, setCircuits] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mapRegion, setMapRegion] = useState<Region | undefined>(undefined);
 
-  const fetchCircuit = async () => {
+  const fetchCircuits = async () => {
     try {
       const response = await fetch('https://ergast.com/api/f1/current/circuits.json');
       const data = await response.json();
-      const circuitData = data.MRData.CircuitTable.Circuits.find(
-        (item: any) => item.circuitId === circuitId
-      );
-      setCircuit(circuitData);
+      const circuitData = data.MRData.CircuitTable.Circuits;
+
+      const circuitLocations = circuitData.map((circuit: any) => ({
+        latitude: parseFloat(circuit.Location.lat),
+        longitude: parseFloat(circuit.Location.long),
+      }));
+
+      const calculatedRegion = getBoundingRegion(circuitLocations);
+      setMapRegion(calculatedRegion);
+      setCircuits(circuitData);
     } catch (error) {
       console.log('Error while fetching circuit data', error);
     } finally {
@@ -23,30 +30,58 @@ export default function Circuit({ circuitId }: { circuitId: string }) {
     }
   };
 
+  // Function to calculate the bounding region
+  const getBoundingRegion = (locations: LatLng[]): Region => {
+    const latitudes = locations.map((loc) => loc.latitude);
+    const longitudes = locations.map((loc) => loc.longitude);
+
+    const minLat = Math.min(...latitudes);
+    const maxLat = Math.max(...latitudes);
+    const minLng = Math.min(...longitudes);
+    const maxLng = Math.max(...longitudes);
+
+    const latitudeDelta = maxLat - minLat + 5;
+    const longitudeDelta = maxLng - minLng + 5;
+
+    return {
+      latitude: (minLat + maxLat) / 2,
+      longitude: (minLng + maxLng) / 2,
+      latitudeDelta,
+      longitudeDelta,
+    };
+  };
+
   useEffect(() => {
-    fetchCircuit();
-  }, [circuitId]);
+    fetchCircuits();
+  }, []);
 
   if (loading) {
     return <Loading />;
   }
 
-  if (!circuit) {
-    return <Text className="font-semibold text-red-500">No circuit data found!</Text>;
+  if (!circuits.length) {
+    return (
+      <View>
+        <Text className="font-semibold text-red-500">No circuit data found!</Text>
+      </View>
+    );
   }
 
-  const { lat, long } = circuit.Location;
-
   return (
-    <MapView
-      style={{ flex: 1 }}
-      initialRegion={{
-        latitude: parseFloat(lat),
-        longitude: parseFloat(long),
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      }}>
-      <Marker coordinate={{ latitude: parseFloat(lat), longitude: parseFloat(long) }} />
+    <MapView style={{ flex: 1 }} initialRegion={mapRegion}>
+      {circuits.map((circuit) => {
+        const { circuitId, circuitName, Location } = circuit;
+        const { lat, long } = Location;
+
+        return (
+          <Marker
+            key={circuitId}
+            coordinate={{ latitude: parseFloat(lat), longitude: parseFloat(long) }}
+            title={circuitName}
+            description={`${Location.locality}, ${Location.country}`}
+          />
+        );
+      })}
     </MapView>
   );
 }
