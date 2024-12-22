@@ -118,7 +118,7 @@ export default function Register() {
                 onPress={() => {
                   router.push('/(auth)/login');
                 }}>
-                <Text className="text-xl font-bold text-white">
+                <Text className="rounded-full bg-black p-2 text-xl font-bold text-white">
                   Already have an account? Sign In
                 </Text>
               </Pressable>

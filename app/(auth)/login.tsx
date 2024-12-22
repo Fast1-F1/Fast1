@@ -90,7 +90,7 @@ export default function Login() {
               onPress={() => {
                 router.push('/(auth)/register');
               }}>
-              <Text className="text-xl font-bold text-white shadow-lg shadow-black">
+              <Text className="rounded-full bg-black p-2 text-xl font-bold text-white shadow-lg shadow-black">
                 Don't have an account? Sign Up
               </Text>
             </Pressable>
