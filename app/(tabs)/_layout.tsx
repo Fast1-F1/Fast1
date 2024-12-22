@@ -55,6 +55,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="circuit"
+        options={{
+          title: 'Circuits',
+          tabBarIcon: ({ color }) => <FontAwesome name="map" size={30} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="social"
         options={{
           title: 'Social Media',
